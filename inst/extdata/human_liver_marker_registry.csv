@@ -1,0 +1,121 @@
+species,tissue,layer,celltype,marker_group,gene,direction,evidence,notes
+Human,Liver,Layer1,Hepatocyte,identity,ALB,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatocyte,identity,TTR,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatocyte,identity,APOA1,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatocyte,identity,HNF4A,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatocyte,identity,CPS1,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatocyte,identity,ASS1,positive,curated,Initial framework registry
+Human,Liver,Layer1,Cholangiocyte,identity,KRT19,positive,curated,Initial framework registry
+Human,Liver,Layer1,Cholangiocyte,identity,KRT8,positive,curated,Initial framework registry
+Human,Liver,Layer1,Cholangiocyte,identity,KRT18,positive,curated,Initial framework registry
+Human,Liver,Layer1,Cholangiocyte,identity,EPCAM,positive,curated,Initial framework registry
+Human,Liver,Layer1,Cholangiocyte,identity,KRT7,positive,curated,Initial framework registry
+Human,Liver,Layer1,Cholangiocyte,identity,SOX9,positive,curated,Initial framework registry
+Human,Liver,Layer1,LSEC,identity,KDR,positive,curated,Initial framework registry
+Human,Liver,Layer1,LSEC,identity,KLF2,positive,curated,Initial framework registry
+Human,Liver,Layer1,LSEC,identity,STAB1,positive,curated,Initial framework registry
+Human,Liver,Layer1,LSEC,identity,STAB2,positive,curated,Initial framework registry
+Human,Liver,Layer1,LSEC,identity,CLEC4G,positive,curated,Initial framework registry
+Human,Liver,Layer1,LSEC,identity,LYVE1,positive,curated,Initial framework registry
+Human,Liver,Layer1,LSEC,identity,PLVAP,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatic stellate cell,identity,COL1A1,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatic stellate cell,identity,COL1A2,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatic stellate cell,identity,DCN,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatic stellate cell,identity,LUM,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatic stellate cell,identity,RGS5,positive,curated,Initial framework registry
+Human,Liver,Layer1,Hepatic stellate cell,identity,PDGFRB,positive,curated,Initial framework registry
+Human,Liver,Layer1,Macrophage,identity,CD68,positive,curated,Initial framework registry
+Human,Liver,Layer1,Macrophage,identity,CSF1R,positive,curated,Initial framework registry
+Human,Liver,Layer1,Macrophage,identity,AIF1,positive,curated,Initial framework registry
+Human,Liver,Layer1,Macrophage,identity,TYROBP,positive,curated,Initial framework registry
+Human,Liver,Layer1,Macrophage,identity,FCER1G,positive,curated,Initial framework registry
+Human,Liver,Layer1,Macrophage,identity,LST1,positive,curated,Initial framework registry
+Human,Liver,Layer1,Monocyte,identity,LYZ,positive,curated,Initial framework registry
+Human,Liver,Layer1,Monocyte,identity,CCR2,positive,curated,Initial framework registry
+Human,Liver,Layer1,Monocyte,identity,S100A8,positive,curated,Initial framework registry
+Human,Liver,Layer1,Monocyte,identity,S100A9,positive,curated,Initial framework registry
+Human,Liver,Layer1,Monocyte,identity,CTSS,positive,curated,Initial framework registry
+Human,Liver,Layer1,Monocyte,identity,FCN1,positive,curated,Initial framework registry
+Human,Liver,Layer1,Neutrophil,identity,S100A8,positive,curated,Initial framework registry
+Human,Liver,Layer1,Neutrophil,identity,S100A9,positive,curated,Initial framework registry
+Human,Liver,Layer1,Neutrophil,identity,FCGR3B,positive,curated,Initial framework registry
+Human,Liver,Layer1,Neutrophil,identity,CSF3R,positive,curated,Initial framework registry
+Human,Liver,Layer1,Neutrophil,identity,MMP8,positive,curated,Initial framework registry
+Human,Liver,Layer1,Neutrophil,identity,MMP9,positive,curated,Initial framework registry
+Human,Liver,Layer1,T cell,identity,CD3D,positive,curated,Initial framework registry
+Human,Liver,Layer1,T cell,identity,CD3E,positive,curated,Initial framework registry
+Human,Liver,Layer1,T cell,identity,TRAC,positive,curated,Initial framework registry
+Human,Liver,Layer1,T cell,identity,LCK,positive,curated,Initial framework registry
+Human,Liver,Layer1,T cell,identity,IL7R,positive,curated,Initial framework registry
+Human,Liver,Layer1,B cell,identity,CD79A,positive,curated,Initial framework registry
+Human,Liver,Layer1,B cell,identity,MS4A1,positive,curated,Initial framework registry
+Human,Liver,Layer1,B cell,identity,CD37,positive,curated,Initial framework registry
+Human,Liver,Layer1,B cell,identity,CD74,positive,curated,Initial framework registry
+Human,Liver,Layer1,B cell,identity,HLA-DRA,positive,curated,Initial framework registry
+Human,Liver,Layer1,NK cell,identity,NKG7,positive,curated,Initial framework registry
+Human,Liver,Layer1,NK cell,identity,KLRD1,positive,curated,Initial framework registry
+Human,Liver,Layer1,NK cell,identity,KLRK1,positive,curated,Initial framework registry
+Human,Liver,Layer1,NK cell,identity,PRF1,positive,curated,Initial framework registry
+Human,Liver,Layer1,NK cell,identity,GNLY,positive,curated,Initial framework registry
+Human,Liver,Layer2,Resident Kupffer-like,identity,VSIG4,positive,curated,Initial framework registry
+Human,Liver,Layer2,Resident Kupffer-like,identity,MARCO,positive,curated,Initial framework registry
+Human,Liver,Layer2,Resident Kupffer-like,identity,CD5L,positive,curated,Initial framework registry
+Human,Liver,Layer2,Resident Kupffer-like,identity,C1QA,positive,curated,Initial framework registry
+Human,Liver,Layer2,Resident Kupffer-like,identity,C1QB,positive,curated,Initial framework registry
+Human,Liver,Layer2,Resident Kupffer-like,identity,C1QC,positive,curated,Initial framework registry
+Human,Liver,Layer2,Resident Kupffer-like,identity,TIMD4,positive,curated,Initial framework registry
+Human,Liver,Layer2,Monocyte-like,identity,CCR2,positive,curated,Initial framework registry
+Human,Liver,Layer2,Monocyte-like,identity,S100A8,positive,curated,Initial framework registry
+Human,Liver,Layer2,Monocyte-like,identity,S100A9,positive,curated,Initial framework registry
+Human,Liver,Layer2,Monocyte-like,identity,FCN1,positive,curated,Initial framework registry
+Human,Liver,Layer2,Monocyte-like,identity,CTSS,positive,curated,Initial framework registry
+Human,Liver,Layer2,Monocyte-like,identity,VCAN,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,TNF,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,IL1B,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,IL6,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,PTGS2,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,CD80,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,CD86,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,CXCL9,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,CXCL10,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,CCL2,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,GBP1,positive,curated,Initial framework registry
+Human,Liver,Layer2,Inflammatory M1-like,inflammatory,GBP2,positive,curated,Initial framework registry
+Human,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,IL10,positive,curated,Initial framework registry
+Human,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,MRC1,positive,curated,Initial framework registry
+Human,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,CD163,positive,curated,Initial framework registry
+Human,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,CCL18,positive,curated,Initial framework registry
+Human,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,CCL22,positive,curated,Initial framework registry
+Human,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,MAF,positive,curated,Initial framework registry
+Human,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,KLF4,positive,curated,Initial framework registry
+Human,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,SPP1,positive,curated,Initial framework registry
+Human,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,TREM2,positive,curated,Initial framework registry
+Human,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,GPNMB,positive,curated,Initial framework registry
+Human,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,LGALS3,positive,curated,Initial framework registry
+Human,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,CD9,positive,curated,Initial framework registry
+Human,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,FABP5,positive,curated,Initial framework registry
+Human,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,CTSB,positive,curated,Initial framework registry
+Human,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,CTSD,positive,curated,Initial framework registry
+Human,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,LPL,positive,curated,Initial framework registry
+Human,Liver,Layer2,Activated HSC,fibrogenic,ACTA2,positive,curated,Initial framework registry
+Human,Liver,Layer2,Activated HSC,fibrogenic,TAGLN,positive,curated,Initial framework registry
+Human,Liver,Layer2,Activated HSC,fibrogenic,PDGFRB,positive,curated,Initial framework registry
+Human,Liver,Layer2,Activated HSC,fibrogenic,COL1A1,positive,curated,Initial framework registry
+Human,Liver,Layer2,Activated HSC,fibrogenic,COL1A2,positive,curated,Initial framework registry
+Human,Liver,Layer2,Activated HSC,fibrogenic,COL3A1,positive,curated,Initial framework registry
+Human,Liver,Layer2,Activated HSC,fibrogenic,TIMP1,positive,curated,Initial framework registry
+Human,Liver,Layer2,Activated HSC,fibrogenic,LOX,positive,curated,Initial framework registry
+Human,Liver,Layer2,Activated HSC,fibrogenic,LOXL1,positive,curated,Initial framework registry
+Human,Liver,Layer2,Quiescent HSC,quiescent,LRAT,positive,curated,Initial framework registry
+Human,Liver,Layer2,Quiescent HSC,quiescent,RGS5,positive,curated,Initial framework registry
+Human,Liver,Layer2,Quiescent HSC,quiescent,RELN,positive,curated,Initial framework registry
+Human,Liver,Layer2,Quiescent HSC,quiescent,DCN,positive,curated,Initial framework registry
+Human,Liver,Layer2,Quiescent HSC,quiescent,IGFBP3,positive,curated,Initial framework registry
+Human,Liver,Layer2,Quiescent HSC,quiescent,CYGB,positive,curated,Initial framework registry
+Human,Liver,Layer2,Quiescent HSC,quiescent,ADIRF,positive,curated,Initial framework registry
+Human,Liver,Layer2,Quiescent HSC,quiescent,PPARG,positive,curated,Initial framework registry
+Human,Liver,Layer2,Quiescent HSC,quiescent,RBP1,positive,curated,Initial framework registry
+Human,Liver,Layer2,Quiescent HSC,quiescent,GPX3,positive,curated,Initial framework registry
+Human,Liver,Layer2,Resident Kupffer-like,exclusion,CCR2,negative,curated,Monocyte-associated exclusion marker
+Human,Liver,Layer2,Pro-resolution M2-like,exclusion,S100A8,negative,curated,Avoid neutrophil/monocyte contamination
+Human,Liver,Layer2,Pro-resolution M2-like,exclusion,S100A9,negative,curated,Avoid neutrophil/monocyte contamination

@@ -1,0 +1,126 @@
+species,tissue,layer,celltype,marker_group,gene,direction,evidence,notes
+Mouse,Liver,Layer1,Hepatocyte,identity,Alb,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatocyte,identity,Ttr,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatocyte,identity,Apoa1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatocyte,identity,Hnf4a,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatocyte,identity,Cps1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatocyte,identity,Ass1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Cholangiocyte,identity,Krt19,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Cholangiocyte,identity,Krt8,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Cholangiocyte,identity,Krt18,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Cholangiocyte,identity,Epcam,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Cholangiocyte,identity,Krt7,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Cholangiocyte,identity,Sox9,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,LSEC,identity,Kdr,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,LSEC,identity,Klf2,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,LSEC,identity,Stab1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,LSEC,identity,Stab2,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,LSEC,identity,Clec4g,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,LSEC,identity,Lyve1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatic stellate cell,identity,Col1a1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatic stellate cell,identity,Col1a2,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatic stellate cell,identity,Dcn,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatic stellate cell,identity,Lum,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatic stellate cell,identity,Rgs5,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Hepatic stellate cell,identity,Pdgfrb,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Macrophage,identity,Adgre1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Macrophage,identity,Csf1r,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Macrophage,identity,Cd68,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Macrophage,identity,Lyz2,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Macrophage,identity,Tyrobp,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Macrophage,identity,Fcerg1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Monocyte,identity,Lyz2,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Monocyte,identity,Ccr2,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Monocyte,identity,Ly6c2,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Monocyte,identity,S100a8,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Monocyte,identity,S100a9,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Monocyte,identity,Ctss,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Neutrophil,identity,S100a8,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Neutrophil,identity,S100a9,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Neutrophil,identity,Retnlg,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Neutrophil,identity,Mmp8,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Neutrophil,identity,Mmp9,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,Neutrophil,identity,Csf3r,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,T cell,identity,Cd3d,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,T cell,identity,Cd3e,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,T cell,identity,Trac,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,T cell,identity,Lck,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,T cell,identity,Il7r,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,B cell,identity,Cd79a,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,B cell,identity,Ms4a1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,B cell,identity,Cd37,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,B cell,identity,Cd74,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,B cell,identity,H2-Aa,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,NK cell,identity,Nkg7,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,NK cell,identity,Klrb1c,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,NK cell,identity,Klrk1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,NK cell,identity,Prf1,positive,curated,Initial framework registry
+Mouse,Liver,Layer1,NK cell,identity,Gzmb,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Resident Kupffer-like,identity,Clec4f,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Resident Kupffer-like,identity,Timd4,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Resident Kupffer-like,identity,Vsig4,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Resident Kupffer-like,identity,Marco,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Resident Kupffer-like,identity,Cd5l,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Resident Kupffer-like,identity,C1qa,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Resident Kupffer-like,identity,C1qb,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Resident Kupffer-like,identity,C1qc,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Monocyte-like,identity,Ccr2,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Monocyte-like,identity,Ly6c2,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Monocyte-like,identity,S100a8,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Monocyte-like,identity,S100a9,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Monocyte-like,identity,Plac8,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Monocyte-like,identity,Ctss,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Monocyte-like,identity,Fcn1,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Inflammatory M1-like,inflammatory,Tnf,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Inflammatory M1-like,inflammatory,Il1b,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Inflammatory M1-like,inflammatory,Il6,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Inflammatory M1-like,inflammatory,Nos2,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Inflammatory M1-like,inflammatory,Ptgs2,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Inflammatory M1-like,inflammatory,Cd80,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Inflammatory M1-like,inflammatory,Cd86,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Inflammatory M1-like,inflammatory,Cxcl9,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Inflammatory M1-like,inflammatory,Cxcl10,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Inflammatory M1-like,inflammatory,Ccl2,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,Il10,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,Mrc1,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,Arg1,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,Retnla,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,Chil3,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,Ccl24,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,Maf,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Pro-resolution M2-like,anti_inflammatory,Klf4,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,Spp1,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,Trem2,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,Gpnmb,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,Lgals3,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,Cd9,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,Fabp5,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,Ctsb,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,Ctsd,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,SPP1/TREM2 MASH-associated,mash_associated,Lpl,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Efferocytosis/phagocytosis-high,functional,Mertk,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Efferocytosis/phagocytosis-high,functional,Axl,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Efferocytosis/phagocytosis-high,functional,Tyro3,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Efferocytosis/phagocytosis-high,functional,Mfge8,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Efferocytosis/phagocytosis-high,functional,Gas6,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Efferocytosis/phagocytosis-high,functional,Marco,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Efferocytosis/phagocytosis-high,functional,Msr1,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Efferocytosis/phagocytosis-high,functional,Cd36,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Efferocytosis/phagocytosis-high,functional,Lrp1,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Fibrosis-associated macrophage,profibrotic,Spp1,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Fibrosis-associated macrophage,profibrotic,Tgfb1,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Fibrosis-associated macrophage,profibrotic,Pdgfb,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Fibrosis-associated macrophage,profibrotic,Mmp12,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Fibrosis-associated macrophage,profibrotic,Mmp14,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Fibrosis-associated macrophage,profibrotic,Lgals3,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Fibrosis-associated macrophage,profibrotic,Ctsb,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,IL10-response-high macrophage,il10_response,Stat3,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,IL10-response-high macrophage,il10_response,Socs3,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,IL10-response-high macrophage,il10_response,Bcl3,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,IL10-response-high macrophage,il10_response,Il4ra,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,IL10-response-high macrophage,il10_response,Maf,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,IL10-response-high macrophage,il10_response,Klf4,positive,curated,Initial framework registry
+Mouse,Liver,Layer2,Resident Kupffer-like,exclusion,Ccr2,negative,curated,Monocyte-associated exclusion marker
+Mouse,Liver,Layer2,Resident Kupffer-like,exclusion,S100a8,negative,curated,Inflammatory monocyte/neutrophil exclusion marker
+Mouse,Liver,Layer2,Pro-resolution M2-like,exclusion,S100a8,negative,curated,Avoid neutrophil/monocyte contamination
+Mouse,Liver,Layer2,Pro-resolution M2-like,exclusion,S100a9,negative,curated,Avoid neutrophil/monocyte contamination
