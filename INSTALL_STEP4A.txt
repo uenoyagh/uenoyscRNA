@@ -1,0 +1,35 @@
+uenoyscRNA v0.5.0 Step 4A: Review Engine Core
+
+1. Create and switch to the feature branch in Terminal:
+
+git switch develop
+git pull
+git switch -c feature/review-engine
+git push -u origin feature/review-engine
+
+2. Copy these files into the package root:
+
+R/review_core.R
+tests/testthat/test-review-core.R
+
+3. Run in RStudio:
+
+devtools::document()
+devtools::test(filter = "review-core")
+devtools::load_all()
+
+4. Minimal usage:
+
+result <- review_seurat_object(
+  object = seurat_object,
+  annotation_column = "layer2",
+  sample_column = "sample",
+  condition_column = "condition",
+  reduction = "umap"
+)
+
+result$summary
+result$manifest
+result$marker_coverage
+
+Do not copy this instruction file into the package repository.
