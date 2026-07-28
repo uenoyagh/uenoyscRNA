@@ -1,0 +1,6 @@
+species,tissue,dataset,layer,cluster,annotation,confidence,markers,evidence,reviewer,review_date
+Mouse,Liver,Mouse_Mphi_example,Layer2,1,Resident Kupffer-like,High,Clec4f;Timd4;Vsig4;Marco,Canonical resident Kupffer markers; manual review,YU,2026-07-29
+Mouse,Liver,Mouse_Mphi_example,Layer2,2,Monocyte-like,Medium,Ly6c2;Ccr2;S100a8;S100a9,Monocyte-associated markers; manual review,YU,2026-07-29
+Mouse,Liver,Mouse_Mphi_example,Layer2,3,Inflammatory M1-like,Medium,Il1b;Tnf;Ccl2;Cxcl10,Inflammatory module and marker review,YU,2026-07-29
+Mouse,Liver,Mouse_Mphi_example,Layer2,4,Pro-resolution M2-like,Medium,Mrc1;Il10;Maf;Cd163,Pro-resolution module and marker review,YU,2026-07-29
+Mouse,Liver,Mouse_Mphi_example,Layer2,5,SPP1/TREM2 MASH-associated,High,Spp1;Trem2;Gpnmb;Lgals3,MASH-associated macrophage marker review,YU,2026-07-29
