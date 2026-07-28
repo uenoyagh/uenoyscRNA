@@ -1,0 +1,22 @@
+celltype,color
+Hepatocyte,#D9A441
+Cholangiocyte,#F4A6B7
+LSEC,#4DBBD5
+Endothelial cell,#00A087
+Hepatic stellate cell,#B09C85
+Activated hepatic stellate cell,#7A5195
+Fibroblast,#BC5090
+Kupffer cell,#3C5488
+Macrophage,#5B6FA8
+Monocyte-derived macrophage,#8491B4
+Inflammatory macrophage,#DC0000
+Neutrophil,#E64B35
+Dendritic cell,#7E6148
+T cell,#00A087
+B cell,#91D1C2
+NK cell,#6A5ACD
+Plasma cell,#C77CFF
+Mast cell,#B79F00
+Cycling cell,#F39B7F
+Other,#BDBDBD
+Unclassified,#D9D9D9
