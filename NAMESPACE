@@ -2,6 +2,7 @@
 
 export(publish_dotplot)
 export(publish_feature)
+export(publish_heatmap)
 export(publish_umap)
 export(publish_violin)
 export(theme_ueno_scRNA)
