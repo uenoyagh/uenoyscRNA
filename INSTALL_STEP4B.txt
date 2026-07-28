@@ -1,0 +1,63 @@
+uenoyscRNA v0.5.0 Step 4B: Automatic Review Setting Detection
+
+Files:
+- R/review_auto_detection.R
+- R/review_seurat_object_step4B.R
+- tests/testthat/test-review-auto-detection.R
+
+Installation:
+
+1. Confirm the current branch in Terminal:
+
+git branch --show-current
+
+Expected:
+feature/review-engine
+
+2. Copy R/review_auto_detection.R into the package R directory.
+
+3. Replace the existing review_seurat_object() definition in
+   R/review_core.R with the version in:
+   R/review_seurat_object_step4B.R
+
+Important:
+Do not keep two active review_seurat_object() definitions in the package.
+The Step 4B file is a replacement snippet, not an additional permanent R file.
+
+4. Copy the test file into:
+tests/testthat/test-review-auto-detection.R
+
+5. Run in RStudio:
+
+devtools::document()
+devtools::test(filter = "review")
+devtools::load_all()
+
+6. Test with the user's current Seurat object:
+
+detected <- detect_review_settings(seurat_object)
+detected
+
+result <- review_seurat_object(seurat_object)
+
+result$summary
+result$detected_settings$candidates
+
+Expected automatic selection for the current object:
+- annotation_column: celltype_for_R8plot_FIXED2
+- sample_column: sample_display_FIXED2
+- condition_column: condition_FIXED2
+- reduction: umapRPCA
+- assay: current default assay
+
+Explicit arguments always override automatic detection:
+
+result <- review_seurat_object(
+  seurat_object,
+  annotation_column = "celltype_for_R8plot_FIXED2",
+  sample_column = "sample",
+  condition_column = "condition_FIXED2",
+  reduction = "umapRPCA"
+)
+
+Do not copy INSTALL_STEP4B.txt into the repository.
