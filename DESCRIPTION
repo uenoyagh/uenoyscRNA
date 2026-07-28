@@ -24,7 +24,9 @@ Imports:
     ggplot2,
     grDevices,
     patchwork,
-    Seurat
+    scales,
+    Seurat,
+    SeuratObject
 Suggests:
     ggrastr,
     knitr,
