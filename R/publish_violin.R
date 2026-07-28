@@ -87,39 +87,124 @@ publish_violin <- function(
     base_size = 11,
     base_family = ""
 ) {
-  if (!inherits(object, "Seurat")) {
-    stop(
-      "`object` must be a Seurat object.",
-      call. = FALSE
-    )
-  }
 
-  if (!is.character(features) ||
-      length(features) < 1L ||
-      anyNA(features) ||
-      any(!nzchar(features))) {
+  # ---------------------------------------------------------------------------
+  # Core object and feature validation
+  # ---------------------------------------------------------------------------
+
+  .validate_seurat_object(object)
+
+  if (
+    !is.character(features) ||
+    length(features) < 1L ||
+    anyNA(features) ||
+    any(!nzchar(features))
+  ) {
     stop(
       "`features` must be a non-empty character vector.",
       call. = FALSE
     )
   }
 
-  validate_optional_single_string(assay, "assay")
-  validate_optional_single_string(layer, "layer")
-  validate_optional_single_string(group.by, "group.by")
-  validate_optional_single_string(split.by, "split.by")
-  validate_optional_single_string(title, "title")
-  validate_optional_single_string(x_title, "x_title")
-  validate_optional_single_string(y_title, "y_title")
+  # ---------------------------------------------------------------------------
+  # Character argument validation
+  # ---------------------------------------------------------------------------
 
-  validate_single_string(fill_by, "fill_by")
-  validate_positive_number(adjust, "adjust")
-  validate_positive_number(raster_dpi, "raster_dpi")
-  validate_positive_number(base_size, "base_size")
+  validate_optional_single_string(
+    assay,
+    "assay"
+  )
+
+  validate_optional_single_string(
+    layer,
+    "layer"
+  )
+
+  validate_optional_single_string(
+    group.by,
+    "group.by"
+  )
+
+  validate_optional_single_string(
+    split.by,
+    "split.by"
+  )
+
+  validate_optional_single_string(
+    title,
+    "title"
+  )
+
+  validate_optional_single_string(
+    x_title,
+    "x_title"
+  )
+
+  validate_optional_single_string(
+    y_title,
+    "y_title"
+  )
+
+  validate_single_string(
+    fill_by,
+    "fill_by"
+  )
+
+  # ---------------------------------------------------------------------------
+  # Assay and metadata validation
+  # ---------------------------------------------------------------------------
+
+  .validate_assay(
+    object = object,
+    assay = assay,
+    allow_null = TRUE
+  )
+
+  .validate_metadata_column(
+    object = object,
+    column = group.by,
+    arg = "group.by",
+    allow_null = TRUE
+  )
+
+  if (!is.null(split.by) &&
+      split.by != "ident") {
+
+    .validate_metadata_column(
+      object = object,
+      column = split.by,
+      arg = "split.by",
+      allow_null = FALSE
+    )
+  }
+
+  # ---------------------------------------------------------------------------
+  # Positive-number validation
+  # ---------------------------------------------------------------------------
+
+  validate_positive_number(
+    adjust,
+    "adjust"
+  )
+
+  validate_positive_number(
+    raster_dpi,
+    "raster_dpi"
+  )
+
+  validate_positive_number(
+    base_size,
+    "base_size"
+  )
+
   validate_positive_number(
     violin_linewidth,
     "violin_linewidth"
   )
+
+  # ---------------------------------------------------------------------------
+  # Enumerated argument validation
+  # ---------------------------------------------------------------------------
 
   if (!fill_by %in% c("feature", "ident")) {
     stop(
@@ -127,6 +212,10 @@ publish_violin <- function(
       call. = FALSE
     )
   }
+
+  # ---------------------------------------------------------------------------
+  # Numeric argument validation
+  # ---------------------------------------------------------------------------
 
   if (!is.numeric(point_size) ||
       length(point_size) != 1L ||
@@ -171,6 +260,10 @@ publish_violin <- function(
       call. = FALSE
     )
   }
+
+  # ---------------------------------------------------------------------------
+  # Logical argument validation
+  # ---------------------------------------------------------------------------
 
   logical_arguments <- list(
     same_y_limits = same_y_limits,
@@ -219,6 +312,10 @@ publish_violin <- function(
     )
   }
 
+  # ---------------------------------------------------------------------------
+  # Sort validation
+  # ---------------------------------------------------------------------------
+
   valid_sort <- (
     is.logical(sort) &&
       length(sort) == 1L &&
@@ -227,7 +324,10 @@ publish_violin <- function(
     is.character(sort) &&
       length(sort) == 1L &&
       !is.na(sort) &&
-      sort %in% c("increasing", "decreasing")
+      sort %in% c(
+        "increasing",
+        "decreasing"
+      )
   )
 
   if (!valid_sort) {
@@ -239,6 +339,10 @@ publish_violin <- function(
       call. = FALSE
     )
   }
+
+  # ---------------------------------------------------------------------------
+  # Identity and colour validation
+  # ---------------------------------------------------------------------------
 
   if (!is.null(idents) &&
       (!is.character(idents) &&
@@ -264,33 +368,63 @@ publish_violin <- function(
     )
   }
 
-  if (!is.null(group_order) &&
-      (!is.character(group_order) ||
-       length(group_order) < 1L ||
-       anyNA(group_order) ||
-       any(!nzchar(group_order)))) {
-    stop(
-      paste0(
-        "`group_order` must be NULL or a non-empty ",
-        "character vector."
-      ),
-      call. = FALSE
+  # ---------------------------------------------------------------------------
+  # Group-order argument validation
+  # ---------------------------------------------------------------------------
+
+  if (!is.null(group_order)) {
+
+    .validate_character_vector(
+      x = group_order,
+      arg = "group_order"
     )
+
+    if (any(!nzchar(group_order))) {
+      stop(
+        paste0(
+          "`group_order` must be NULL or a non-empty ",
+          "character vector."
+        ),
+        call. = FALSE
+      )
+    }
+
+    if (anyDuplicated(group_order)) {
+      stop(
+        "`group_order` must not contain duplicated values.",
+        call. = FALSE
+      )
+    }
   }
 
-  if (!is.null(split_order) &&
-      (!is.character(split_order) ||
-       length(split_order) < 1L ||
-       anyNA(split_order) ||
-       any(!nzchar(split_order)))) {
-    stop(
-      paste0(
-        "`split_order` must be NULL or a non-empty ",
-        "character vector."
-      ),
-      call. = FALSE
+  if (!is.null(split_order)) {
+
+    .validate_character_vector(
+      x = split_order,
+      arg = "split_order"
     )
+
+    if (any(!nzchar(split_order))) {
+      stop(
+        paste0(
+          "`split_order` must be NULL or a non-empty ",
+          "character vector."
+        ),
+        call. = FALSE
+      )
+    }
+
+    if (anyDuplicated(split_order)) {
+      stop(
+        "`split_order` must not contain duplicated values.",
+        call. = FALSE
+      )
+    }
   }
+
+  # ---------------------------------------------------------------------------
+  # Layout validation
+  # ---------------------------------------------------------------------------
 
   if (!is.null(ncol) &&
       (!is.numeric(ncol) ||
@@ -305,53 +439,15 @@ publish_violin <- function(
     )
   }
 
-  available_assays <- names(object@assays)
-
-  if (!is.null(assay) &&
-      !assay %in% available_assays) {
-    stop(
-      paste0(
-        "Assay `",
-        assay,
-        "` was not found. Available assays: ",
-        paste(
-          available_assays,
-          collapse = ", "
-        ),
-        "."
-      ),
-      call. = FALSE
-    )
-  }
-
-  metadata_columns <- colnames(object[[]])
-
-  if (!is.null(group.by) &&
-      !group.by %in% metadata_columns) {
-    stop(
-      paste0(
-        "`group.by = \"",
-        group.by,
-        "\"` was not found in object metadata."
-      ),
-      call. = FALSE
-    )
-  }
-
-  if (!is.null(split.by) &&
-      split.by != "ident" &&
-      !split.by %in% metadata_columns) {
-    stop(
-      paste0(
-        "`split.by = \"",
-        split.by,
-        "\"` was not found in object metadata."
-      ),
-      call. = FALSE
-    )
-  }
+  # ---------------------------------------------------------------------------
+  # Apply group ordering
+  #
+  # This logic is retained explicitly because group.by = NULL uses active
+  # identities rather than a metadata column.
+  # ---------------------------------------------------------------------------
 
   if (!is.null(group_order)) {
+
     if (is.null(group.by)) {
       observed_groups <- unique(
         as.character(
@@ -365,6 +461,10 @@ publish_violin <- function(
         )
       )
     }
+
+    observed_groups <- observed_groups[
+      !is.na(observed_groups)
+    ]
 
     missing_groups <- setdiff(
       group_order,
@@ -385,34 +485,30 @@ publish_violin <- function(
       )
     }
 
-    remaining_groups <- setdiff(
-      observed_groups,
-      group_order
-    )
-
-    complete_group_order <- c(
-      group_order,
-      remaining_groups
-    )
-
     if (is.null(group.by)) {
-      SeuratObject::Idents(object) <- factor(
-        as.character(
-          SeuratObject::Idents(object)
-        ),
-        levels = complete_group_order
-      )
+
+      SeuratObject::Idents(object) <-
+        .apply_group_order(
+          x = SeuratObject::Idents(object),
+          order = group_order
+        )
+
     } else {
-      object[[group.by]] <- factor(
-        as.character(
-          object[[group.by]][, 1]
-        ),
-        levels = complete_group_order
-      )
+
+      object[[group.by]] <-
+        .apply_group_order(
+          x = object[[group.by]][, 1],
+          order = group_order
+        )
     }
   }
 
+  # ---------------------------------------------------------------------------
+  # Apply split ordering
+  # ---------------------------------------------------------------------------
+
   if (!is.null(split_order)) {
+
     if (is.null(split.by)) {
       stop(
         paste0(
@@ -437,6 +533,10 @@ publish_violin <- function(
       )
     }
 
+    observed_splits <- observed_splits[
+      !is.na(observed_splits)
+    ]
+
     missing_splits <- setdiff(
       split_order,
       observed_splits
@@ -456,32 +556,27 @@ publish_violin <- function(
       )
     }
 
-    remaining_splits <- setdiff(
-      observed_splits,
-      split_order
-    )
-
-    complete_split_order <- c(
-      split_order,
-      remaining_splits
-    )
-
     if (split.by == "ident") {
-      SeuratObject::Idents(object) <- factor(
-        as.character(
-          SeuratObject::Idents(object)
-        ),
-        levels = complete_split_order
-      )
+
+      SeuratObject::Idents(object) <-
+        .apply_group_order(
+          x = SeuratObject::Idents(object),
+          order = split_order
+        )
+
     } else {
-      object[[split.by]] <- factor(
-        as.character(
-          object[[split.by]][, 1]
-        ),
-        levels = complete_split_order
-      )
+
+      object[[split.by]] <-
+        .apply_group_order(
+          x = object[[split.by]][, 1],
+          order = split_order
+        )
     }
   }
+
+  # ---------------------------------------------------------------------------
+  # Rasterisation fallback
+  # ---------------------------------------------------------------------------
 
   if (isTRUE(raster) &&
       point_size > 0 &&
@@ -499,6 +594,10 @@ publish_violin <- function(
 
     raster <- FALSE
   }
+
+  # ---------------------------------------------------------------------------
+  # Create violin plots
+  # ---------------------------------------------------------------------------
 
   plots <- Seurat::VlnPlot(
     object = object,
@@ -531,9 +630,14 @@ publish_violin <- function(
     plots <- list(plots)
   }
 
+  # ---------------------------------------------------------------------------
+  # Apply publication formatting
+  # ---------------------------------------------------------------------------
+
   plots <- lapply(
     plots,
     function(plot) {
+
       plot <- plot +
         theme_ueno_scRNA(
           base_size = base_size,
@@ -597,6 +701,7 @@ publish_violin <- function(
 
       if (isTRUE(rotate_groups) &&
           !isTRUE(flip)) {
+
         horizontal_justification <- if (
           group_angle >= 0
         ) {
@@ -620,9 +725,17 @@ publish_violin <- function(
     }
   )
 
+  # ---------------------------------------------------------------------------
+  # Return separate plots when combine = FALSE
+  # ---------------------------------------------------------------------------
+
   if (!isTRUE(combine)) {
     return(plots)
   }
+
+  # ---------------------------------------------------------------------------
+  # Combine plots
+  # ---------------------------------------------------------------------------
 
   combined_plot <- patchwork::wrap_plots(
     plots,

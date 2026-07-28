@@ -70,15 +70,14 @@ publish_heatmap <- function(
   # Validate object
   # ---------------------------------------------------------------------------
 
-  if (!inherits(object, "Seurat")) {
-    stop(
-      "`object` must be a Seurat object.",
-      call. = FALSE
-    )
-  }
+  .validate_seurat_object(object)
 
   # ---------------------------------------------------------------------------
   # Validate features
+  #
+  # The original validation is retained to preserve the existing error
+  # contract and because DoHeatmap features must also be checked against
+  # the selected assay layer.
   # ---------------------------------------------------------------------------
 
   if (
@@ -88,7 +87,10 @@ publish_heatmap <- function(
     any(!nzchar(features))
   ) {
     stop(
-      "`features` must be a non-empty character vector without missing values.",
+      paste0(
+        "`features` must be a non-empty character vector ",
+        "without missing values."
+      ),
       call. = FALSE
     )
   }
@@ -103,30 +105,11 @@ publish_heatmap <- function(
     assay <- SeuratObject::DefaultAssay(object)
   }
 
-  if (
-    !is.character(assay) ||
-    length(assay) != 1L ||
-    is.na(assay) ||
-    !nzchar(assay)
-  ) {
-    stop(
-      "`assay` must be NULL or a single assay name.",
-      call. = FALSE
-    )
-  }
-
-  available_assays <- SeuratObject::Assays(object)
-
-  if (!assay %in% available_assays) {
-    stop(
-      sprintf(
-        "Assay `%s` was not found. Available assays: %s.",
-        assay,
-        paste(available_assays, collapse = ", ")
-      ),
-      call. = FALSE
-    )
-  }
+  .validate_assay(
+    object = object,
+    assay = assay,
+    allow_null = FALSE
+  )
 
   object <- object
   SeuratObject::DefaultAssay(object) <- assay
@@ -150,17 +133,22 @@ publish_heatmap <- function(
     stop(
       sprintf(
         "`slot` must be one of: %s.",
-        paste(allowed_slots, collapse = ", ")
+        paste(
+          allowed_slots,
+          collapse = ", "
+        )
       ),
       call. = FALSE
     )
   }
 
   # ---------------------------------------------------------------------------
-  # Check feature availability
+  # Check feature availability in assay
   # ---------------------------------------------------------------------------
 
-  assay_features <- rownames(object[[assay]])
+  assay_features <- rownames(
+    object[[assay]]
+  )
 
   missing_from_assay <- setdiff(
     features,
@@ -174,11 +162,18 @@ publish_heatmap <- function(
           "The following features were not found in assay `%s`: %s."
         ),
         assay,
-        paste(missing_from_assay, collapse = ", ")
+        paste(
+          missing_from_assay,
+          collapse = ", "
+        )
       ),
       call. = FALSE
     )
   }
+
+  # ---------------------------------------------------------------------------
+  # Check feature availability in selected layer
+  # ---------------------------------------------------------------------------
 
   layer_features <- tryCatch(
     {
@@ -195,6 +190,7 @@ publish_heatmap <- function(
   )
 
   if (!is.null(layer_features)) {
+
     missing_from_layer <- setdiff(
       features,
       layer_features
@@ -204,12 +200,16 @@ publish_heatmap <- function(
       stop(
         sprintf(
           paste0(
-            "The following features were not found in `%s` for assay `%s`: ",
-            "%s. Run ScaleData() or select another slot."
+            "The following features were not found in `%s` ",
+            "for assay `%s`: %s. Run ScaleData() or select ",
+            "another slot."
           ),
           slot,
           assay,
-          paste(missing_from_layer, collapse = ", ")
+          paste(
+            missing_from_layer,
+            collapse = ", "
+          )
         ),
         call. = FALSE
       )
@@ -221,6 +221,7 @@ publish_heatmap <- function(
   # ---------------------------------------------------------------------------
 
   if (!is.null(cells)) {
+
     if (
       !is.character(cells) ||
       length(cells) == 0L ||
@@ -242,7 +243,10 @@ publish_heatmap <- function(
       stop(
         sprintf(
           "The following cells were not found: %s.",
-          paste(missing_cells, collapse = ", ")
+          paste(
+            missing_cells,
+            collapse = ", "
+          )
         ),
         call. = FALSE
       )
@@ -267,28 +271,29 @@ publish_heatmap <- function(
     )
   }
 
-  metadata_columns <- colnames(object[[]])
-
-  missing_group_columns <- setdiff(
+  metadata_group_columns <- setdiff(
     group.by,
-    c("ident", metadata_columns)
+    "ident"
   )
 
-  if (length(missing_group_columns) > 0L) {
-    stop(
-      sprintf(
-        "The following `group.by` columns were not found: %s.",
-        paste(missing_group_columns, collapse = ", ")
-      ),
-      call. = FALSE
+  for (group_column in metadata_group_columns) {
+    .validate_metadata_column(
+      object = object,
+      column = group_column,
+      arg = "group.by",
+      allow_null = FALSE
     )
   }
 
   # ---------------------------------------------------------------------------
-  # Apply group order
+  # Validate and apply group order
+  #
+  # group_order is supported only when one grouping variable is supplied.
+  # Active identities and metadata columns are handled separately.
   # ---------------------------------------------------------------------------
 
   if (!is.null(group_order)) {
+
     if (
       !is.character(group_order) ||
       length(group_order) == 0L ||
@@ -313,9 +318,16 @@ publish_heatmap <- function(
     }
 
     if (identical(group.by, "ident")) {
+
       observed_groups <- unique(
-        as.character(SeuratObject::Idents(object))
+        as.character(
+          SeuratObject::Idents(object)
+        )
       )
+
+      observed_groups <- observed_groups[
+        !is.na(observed_groups)
+      ]
 
       missing_groups <- setdiff(
         group_order,
@@ -325,31 +337,36 @@ publish_heatmap <- function(
       if (length(missing_groups) > 0L) {
         stop(
           sprintf(
-            "The following groups were not found in active identities: %s.",
-            paste(missing_groups, collapse = ", ")
+            paste0(
+              "The following groups were not found in ",
+              "active identities: %s."
+            ),
+            paste(
+              missing_groups,
+              collapse = ", "
+            )
           ),
           call. = FALSE
         )
       }
 
-      remaining_groups <- setdiff(
-        observed_groups,
-        group_order
-      )
+      SeuratObject::Idents(object) <-
+        .apply_group_order(
+          x = SeuratObject::Idents(object),
+          order = group_order
+        )
 
-      full_group_order <- c(
-        group_order,
-        remaining_groups
-      )
-
-      SeuratObject::Idents(object) <- factor(
-        as.character(SeuratObject::Idents(object)),
-        levels = full_group_order
-      )
     } else {
+
+      group_values <- object[[group.by, drop = TRUE]]
+
       observed_groups <- unique(
-        as.character(object[[group.by, drop = TRUE]])
+        as.character(group_values)
       )
+
+      observed_groups <- observed_groups[
+        !is.na(observed_groups)
+      ]
 
       missing_groups <- setdiff(
         group_order,
@@ -361,26 +378,20 @@ publish_heatmap <- function(
           sprintf(
             "The following groups were not found in `%s`: %s.",
             group.by,
-            paste(missing_groups, collapse = ", ")
+            paste(
+              missing_groups,
+              collapse = ", "
+            )
           ),
           call. = FALSE
         )
       }
 
-      remaining_groups <- setdiff(
-        observed_groups,
-        group_order
-      )
-
-      full_group_order <- c(
-        group_order,
-        remaining_groups
-      )
-
-      object[[group.by]] <- factor(
-        as.character(object[[group.by, drop = TRUE]]),
-        levels = full_group_order
-      )
+      object[[group.by]] <-
+        .apply_group_order(
+          x = group_values,
+          order = group_order
+        )
     }
   }
 
@@ -389,6 +400,7 @@ publish_heatmap <- function(
   # ---------------------------------------------------------------------------
 
   if (!is.null(group.colors)) {
+
     if (
       !is.character(group.colors) ||
       length(group.colors) == 0L ||
@@ -396,14 +408,19 @@ publish_heatmap <- function(
       any(!nzchar(group.colors))
     ) {
       stop(
-        "`group.colors` must be NULL or a non-empty character vector.",
+        paste0(
+          "`group.colors` must be NULL or a non-empty ",
+          "character vector."
+        ),
         call. = FALSE
       )
     }
   }
 
   # ---------------------------------------------------------------------------
-  # Validate numeric arguments
+  # Numeric validation helper
+  #
+  # Retained locally in this refactoring step to preserve existing messages.
   # ---------------------------------------------------------------------------
 
   validate_single_number <- function(
@@ -413,6 +430,7 @@ publish_heatmap <- function(
     strictly_greater = FALSE,
     allow_null = FALSE
   ) {
+
     if (allow_null && is.null(value)) {
       return(invisible(TRUE))
     }
@@ -429,7 +447,12 @@ publish_heatmap <- function(
     }
 
     if (!valid) {
-      comparator <- if (strictly_greater) "greater than" else "at least"
+
+      comparator <- if (strictly_greater) {
+        "greater than"
+      } else {
+        "at least"
+      }
 
       stop(
         sprintf(
@@ -444,6 +467,10 @@ publish_heatmap <- function(
 
     invisible(TRUE)
   }
+
+  # ---------------------------------------------------------------------------
+  # Validate numeric arguments
+  # ---------------------------------------------------------------------------
 
   validate_single_number(
     group.bar.height,
@@ -495,7 +522,10 @@ publish_heatmap <- function(
     )
   }
 
-  if (!is.null(disp.max) && disp.max <= disp.min) {
+  if (
+    !is.null(disp.max) &&
+    disp.max <= disp.min
+  ) {
     stop(
       "`disp.max` must be greater than `disp.min`.",
       call. = FALSE
@@ -518,6 +548,7 @@ publish_heatmap <- function(
   )
 
   for (argument_name in names(logical_arguments)) {
+
     argument_value <- logical_arguments[[argument_name]]
 
     if (
@@ -594,6 +625,7 @@ publish_heatmap <- function(
   # ---------------------------------------------------------------------------
 
   format_heatmap <- function(plot_object) {
+
     plot_object <- plot_object +
       ggplot2::theme(
         text = ggplot2::element_text(
@@ -649,7 +681,15 @@ publish_heatmap <- function(
     plot_object
   }
 
-  if (is.list(heatmap) && !inherits(heatmap, "ggplot")) {
+  # ---------------------------------------------------------------------------
+  # Format and return output
+  # ---------------------------------------------------------------------------
+
+  if (
+    is.list(heatmap) &&
+    !inherits(heatmap, "ggplot")
+  ) {
+
     heatmap <- lapply(
       heatmap,
       format_heatmap
@@ -660,7 +700,9 @@ publish_heatmap <- function(
         heatmap
       )
     }
+
   } else {
+
     heatmap <- format_heatmap(
       heatmap
     )

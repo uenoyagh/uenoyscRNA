@@ -27,16 +27,17 @@ theme_ueno_scRNA <- function(
     axis_text = TRUE,
     axis_ticks = TRUE
 ) {
-  if (!is.numeric(base_size) || length(base_size) != 1L ||
-      is.na(base_size) || base_size <= 0) {
-    stop(
-      "`base_size` must be a single positive number.",
-      call. = FALSE
-    )
-  }
 
-  if (!is.character(base_family) || length(base_family) != 1L ||
-      is.na(base_family)) {
+  validate_positive_number(
+    x = base_size,
+    argument = "base_size"
+  )
+
+  if (
+    !is.character(base_family) ||
+    length(base_family) != 1L ||
+    is.na(base_family)
+  ) {
     stop(
       "`base_family` must be a single character string.",
       call. = FALSE
@@ -84,6 +85,7 @@ theme_ueno_scRNA <- function(
     )
 
   if (isTRUE(panel_border)) {
+
     theme <- theme +
       ggplot2::theme(
         panel.border = ggplot2::element_rect(
@@ -92,7 +94,9 @@ theme_ueno_scRNA <- function(
           linewidth = 0.6
         )
       )
+
   } else {
+
     theme <- theme +
       ggplot2::theme(
         panel.border = ggplot2::element_blank()
@@ -100,6 +104,7 @@ theme_ueno_scRNA <- function(
   }
 
   if (!isTRUE(axis_text)) {
+
     theme <- theme +
       ggplot2::theme(
         axis.text = ggplot2::element_blank()
@@ -107,6 +112,7 @@ theme_ueno_scRNA <- function(
   }
 
   if (!isTRUE(axis_ticks)) {
+
     theme <- theme +
       ggplot2::theme(
         axis.ticks = ggplot2::element_blank()

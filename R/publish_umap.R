@@ -75,40 +75,73 @@ publish_umap <- function(
     base_size = 11,
     base_family = ""
 ) {
-  if (!inherits(object, "Seurat")) {
-    stop(
-      "`object` must be a Seurat object.",
-      call. = FALSE
-    )
-  }
 
-  validate_single_string(reduction, "reduction")
+  .validate_seurat_object(object)
 
-  validate_optional_single_string(group.by, "group.by")
-  validate_optional_single_string(split.by, "split.by")
-  validate_optional_single_string(title, "title")
+  validate_single_string(
+    x = reduction,
+    argument = "reduction"
+  )
 
-  validate_positive_number(label.size, "label.size")
-  validate_positive_number(point_size, "point_size")
-  validate_positive_number(point_size_factor, "point_size_factor")
-  validate_positive_number(legend_point_size, "legend_point_size")
-  validate_positive_number(base_size, "base_size")
+  validate_optional_single_string(
+    x = group.by,
+    argument = "group.by"
+  )
 
-  if (!is.numeric(alpha) ||
-      length(alpha) != 1L ||
-      is.na(alpha) ||
-      alpha < 0 ||
-      alpha > 1) {
+  validate_optional_single_string(
+    x = split.by,
+    argument = "split.by"
+  )
+
+  validate_optional_single_string(
+    x = title,
+    argument = "title"
+  )
+
+  validate_positive_number(
+    x = label.size,
+    argument = "label.size"
+  )
+
+  validate_positive_number(
+    x = point_size,
+    argument = "point_size"
+  )
+
+  validate_positive_number(
+    x = point_size_factor,
+    argument = "point_size_factor"
+  )
+
+  validate_positive_number(
+    x = legend_point_size,
+    argument = "legend_point_size"
+  )
+
+  validate_positive_number(
+    x = base_size,
+    argument = "base_size"
+  )
+
+  if (
+    !is.numeric(alpha) ||
+    length(alpha) != 1L ||
+    is.na(alpha) ||
+    alpha < 0 ||
+    alpha > 1
+  ) {
     stop(
       "`alpha` must be a single number between 0 and 1.",
       call. = FALSE
     )
   }
 
-  if (!is.numeric(raster.dpi) ||
-      length(raster.dpi) != 2L ||
-      anyNA(raster.dpi) ||
-      any(raster.dpi <= 0)) {
+  if (
+    !is.numeric(raster.dpi) ||
+    length(raster.dpi) != 2L ||
+    anyNA(raster.dpi) ||
+    any(raster.dpi <= 0)
+  ) {
     stop(
       "`raster.dpi` must contain two positive numbers.",
       call. = FALSE
@@ -127,7 +160,9 @@ publish_umap <- function(
   invalid_logical <- vapply(
     logical_arguments,
     function(x) {
-      !is.logical(x) || length(x) != 1L || is.na(x)
+      !is.logical(x) ||
+        length(x) != 1L ||
+        is.na(x)
     },
     logical(1)
   )
@@ -143,7 +178,9 @@ publish_umap <- function(
     )
   }
 
-  available_reductions <- names(object@reductions)
+  available_reductions <- names(
+    object@reductions
+  )
 
   if (!reduction %in% available_reductions) {
     stop(
@@ -151,36 +188,29 @@ publish_umap <- function(
         "Reduction `",
         reduction,
         "` was not found. Available reductions: ",
-        paste(available_reductions, collapse = ", "),
+        paste(
+          available_reductions,
+          collapse = ", "
+        ),
         "."
       ),
       call. = FALSE
     )
   }
 
-  metadata_columns <- colnames(object[[]])
+  .validate_metadata_column(
+    object = object,
+    column = group.by,
+    arg = "group.by",
+    allow_null = TRUE
+  )
 
-  if (!is.null(group.by) && !group.by %in% metadata_columns) {
-    stop(
-      paste0(
-        "`group.by = \"",
-        group.by,
-        "\"` was not found in object metadata."
-      ),
-      call. = FALSE
-    )
-  }
-
-  if (!is.null(split.by) && !split.by %in% metadata_columns) {
-    stop(
-      paste0(
-        "`split.by = \"",
-        split.by,
-        "\"` was not found in object metadata."
-      ),
-      call. = FALSE
-    )
-  }
+  .validate_metadata_column(
+    object = object,
+    column = split.by,
+    arg = "split.by",
+    allow_null = TRUE
+  )
 
   effective_point_size <- point_size * point_size_factor
 
@@ -206,6 +236,7 @@ publish_umap <- function(
   plots <- lapply(
     plots,
     function(plot) {
+
       plot <- plot +
         theme_ueno_scRNA(
           base_size = base_size,
@@ -225,12 +256,21 @@ publish_umap <- function(
         )
 
       if (isTRUE(show_axes)) {
+
         plot <- plot +
           ggplot2::labs(
-            x = paste0(toupper(reduction), "_1"),
-            y = paste0(toupper(reduction), "_2")
+            x = paste0(
+              toupper(reduction),
+              "_1"
+            ),
+            y = paste0(
+              toupper(reduction),
+              "_2"
+            )
           )
+
       } else {
+
         plot <- plot +
           ggplot2::theme(
             axis.title = ggplot2::element_blank(),
@@ -243,11 +283,11 @@ publish_umap <- function(
     }
   )
 
-  if (!is.null(title)) {
-    if (length(plots) == 1L) {
-      plots[[1]] <- plots[[1]] +
-        ggplot2::labs(title = title)
-    }
+  if (!is.null(title) && length(plots) == 1L) {
+    plots[[1]] <- plots[[1]] +
+      ggplot2::labs(
+        title = title
+      )
   }
 
   if (!isTRUE(combine)) {
@@ -275,51 +315,4 @@ publish_umap <- function(
   }
 
   combined_plot
-}
-
-
-validate_single_string <- function(x, argument) {
-  if (!is.character(x) ||
-      length(x) != 1L ||
-      is.na(x) ||
-      !nzchar(x)) {
-    stop(
-      paste0(
-        "`",
-        argument,
-        "` must be a single non-empty character string."
-      ),
-      call. = FALSE
-    )
-  }
-
-  invisible(x)
-}
-
-
-validate_optional_single_string <- function(x, argument) {
-  if (is.null(x)) {
-    return(invisible(x))
-  }
-
-  validate_single_string(x, argument)
-}
-
-
-validate_positive_number <- function(x, argument) {
-  if (!is.numeric(x) ||
-      length(x) != 1L ||
-      is.na(x) ||
-      x <= 0) {
-    stop(
-      paste0(
-        "`",
-        argument,
-        "` must be a single positive number."
-      ),
-      call. = FALSE
-    )
-  }
-
-  invisible(x)
 }

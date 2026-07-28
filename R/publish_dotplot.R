@@ -71,9 +71,16 @@ publish_dotplot <- function(
     base_size = 11,
     base_family = ""
 ) {
-  if (!inherits(object, "Seurat")) {
-    stop("`object` must be a Seurat object.", call. = FALSE)
-  }
+
+  # ---------------------------------------------------------------------------
+  # Validate object
+  # ---------------------------------------------------------------------------
+
+  .validate_seurat_object(object)
+
+  # ---------------------------------------------------------------------------
+  # Validate features
+  # ---------------------------------------------------------------------------
 
   valid_features <- is.character(features) || is.list(features)
 
@@ -89,25 +96,65 @@ publish_dotplot <- function(
     use.names = FALSE
   )
 
-  if (!is.character(flattened_features) ||
-      length(flattened_features) < 1L ||
-      anyNA(flattened_features) ||
-      any(!nzchar(flattened_features))) {
+  if (
+    !is.character(flattened_features) ||
+    length(flattened_features) < 1L ||
+    anyNA(flattened_features) ||
+    any(!nzchar(flattened_features))
+  ) {
     stop(
       "`features` must contain non-empty character feature names.",
       call. = FALSE
     )
   }
 
-  validate_optional_single_string(assay, "assay")
-  validate_optional_single_string(group.by, "group.by")
-  validate_optional_single_string(title, "title")
-  validate_optional_single_string(x_title, "x_title")
-  validate_optional_single_string(y_title, "y_title")
+  # ---------------------------------------------------------------------------
+  # Validate string arguments
+  # ---------------------------------------------------------------------------
 
-  validate_single_string(scale_by, "scale_by")
-  validate_positive_number(dot_scale, "dot_scale")
-  validate_positive_number(base_size, "base_size")
+  validate_optional_single_string(
+    assay,
+    "assay"
+  )
+
+  validate_optional_single_string(
+    group.by,
+    "group.by"
+  )
+
+  validate_optional_single_string(
+    title,
+    "title"
+  )
+
+  validate_optional_single_string(
+    x_title,
+    "x_title"
+  )
+
+  validate_optional_single_string(
+    y_title,
+    "y_title"
+  )
+
+  validate_single_string(
+    scale_by,
+    "scale_by"
+  )
+
+  validate_positive_number(
+    dot_scale,
+    "dot_scale"
+  )
+
+  validate_positive_number(
+    base_size,
+    "base_size"
+  )
+
+  # ---------------------------------------------------------------------------
+  # Validate scale_by
+  # ---------------------------------------------------------------------------
 
   if (!scale_by %in% c("radius", "size")) {
     stop(
@@ -116,36 +163,50 @@ publish_dotplot <- function(
     )
   }
 
-  if (!is.numeric(dot_min) ||
-      length(dot_min) != 1L ||
-      is.na(dot_min) ||
-      dot_min < 0 ||
-      dot_min > 1) {
+  # ---------------------------------------------------------------------------
+  # Validate numeric arguments
+  # ---------------------------------------------------------------------------
+
+  if (
+    !is.numeric(dot_min) ||
+    length(dot_min) != 1L ||
+    is.na(dot_min) ||
+    dot_min < 0 ||
+    dot_min > 1
+  ) {
     stop(
       "`dot_min` must be a single number between 0 and 1.",
       call. = FALSE
     )
   }
 
-  if (!is.numeric(midpoint) ||
-      length(midpoint) != 1L ||
-      is.na(midpoint) ||
-      !is.finite(midpoint)) {
+  if (
+    !is.numeric(midpoint) ||
+    length(midpoint) != 1L ||
+    is.na(midpoint) ||
+    !is.finite(midpoint)
+  ) {
     stop(
       "`midpoint` must be a single finite numeric value.",
       call. = FALSE
     )
   }
 
-  if (!is.numeric(feature_angle) ||
-      length(feature_angle) != 1L ||
-      is.na(feature_angle) ||
-      !is.finite(feature_angle)) {
+  if (
+    !is.numeric(feature_angle) ||
+    length(feature_angle) != 1L ||
+    is.na(feature_angle) ||
+    !is.finite(feature_angle)
+  ) {
     stop(
       "`feature_angle` must be a single finite numeric value.",
       call. = FALSE
     )
   }
+
+  # ---------------------------------------------------------------------------
+  # Validate logical arguments
+  # ---------------------------------------------------------------------------
 
   logical_arguments <- list(
     scale = scale,
@@ -155,7 +216,9 @@ publish_dotplot <- function(
   invalid_logical <- vapply(
     logical_arguments,
     function(x) {
-      !is.logical(x) || length(x) != 1L || is.na(x)
+      !is.logical(x) ||
+        length(x) != 1L ||
+        is.na(x)
     },
     logical(1)
   )
@@ -171,41 +234,39 @@ publish_dotplot <- function(
     )
   }
 
-  if (!is.null(assay)) {
-    available_assays <- names(object@assays)
+  # ---------------------------------------------------------------------------
+  # Validate assay
+  # ---------------------------------------------------------------------------
 
-    if (!assay %in% available_assays) {
-      stop(
-        paste0(
-          "Assay `",
-          assay,
-          "` was not found. Available assays: ",
-          paste(available_assays, collapse = ", "),
-          "."
-        ),
-        call. = FALSE
-      )
-    }
-  }
+  .validate_assay(
+    object = object,
+    assay = assay,
+    allow_null = TRUE
+  )
 
-  metadata_columns <- colnames(object[[]])
+  # ---------------------------------------------------------------------------
+  # Validate metadata column
+  # ---------------------------------------------------------------------------
 
-  if (!is.null(group.by) && !group.by %in% metadata_columns) {
-    stop(
-      paste0(
-        "`group.by = \"",
-        group.by,
-        "\"` was not found in object metadata."
-      ),
-      call. = FALSE
-    )
-  }
+  .validate_metadata_column(
+    object = object,
+    column = group.by,
+    arg = "group.by",
+    allow_null = TRUE
+  )
+
+  # ---------------------------------------------------------------------------
+  # Validate feature_order
+  # ---------------------------------------------------------------------------
 
   if (!is.null(feature_order)) {
-    if (!is.character(feature_order) ||
-        length(feature_order) < 1L ||
-        anyNA(feature_order) ||
-        any(!nzchar(feature_order))) {
+
+    if (
+      !is.character(feature_order) ||
+      length(feature_order) < 1L ||
+      anyNA(feature_order) ||
+      any(!nzchar(feature_order))
+    ) {
       stop(
         "`feature_order` must be NULL or a non-empty character vector.",
         call. = FALSE
@@ -222,7 +283,10 @@ publish_dotplot <- function(
         paste0(
           "The following `feature_order` values are not present in ",
           "`features`: ",
-          paste(missing_feature_order, collapse = ", "),
+          paste(
+            missing_feature_order,
+            collapse = ", "
+          ),
           "."
         ),
         call. = FALSE
@@ -230,23 +294,38 @@ publish_dotplot <- function(
     }
   }
 
-  if (!is.null(group_order) &&
-      (!is.character(group_order) ||
-       length(group_order) < 1L ||
-       anyNA(group_order) ||
-       any(!nzchar(group_order)))) {
+  # ---------------------------------------------------------------------------
+  # Validate group_order
+  # ---------------------------------------------------------------------------
+
+  if (
+    !is.null(group_order) &&
+    (
+      !is.character(group_order) ||
+      length(group_order) < 1L ||
+      anyNA(group_order) ||
+      any(!nzchar(group_order))
+    )
+  ) {
     stop(
       "`group_order` must be NULL or a non-empty character vector.",
       call. = FALSE
     )
   }
 
+  # ---------------------------------------------------------------------------
+  # Validate colour limits
+  # ---------------------------------------------------------------------------
+
   if (!is.null(colour_limits)) {
-    if (!is.numeric(colour_limits) ||
-        length(colour_limits) != 2L ||
-        anyNA(colour_limits) ||
-        any(!is.finite(colour_limits)) ||
-        colour_limits[1] >= colour_limits[2]) {
+
+    if (
+      !is.numeric(colour_limits) ||
+      length(colour_limits) != 2L ||
+      anyNA(colour_limits) ||
+      any(!is.finite(colour_limits)) ||
+      colour_limits[1] >= colour_limits[2]
+    ) {
       stop(
         paste0(
           "`colour_limits` must contain two finite increasing ",
@@ -257,14 +336,21 @@ publish_dotplot <- function(
     }
   }
 
+  # ---------------------------------------------------------------------------
+  # Validate colour quantiles
+  # ---------------------------------------------------------------------------
+
   if (!is.null(colour_quantiles)) {
-    if (!is.numeric(colour_quantiles) ||
-        length(colour_quantiles) != 2L ||
-        anyNA(colour_quantiles) ||
-        any(!is.finite(colour_quantiles)) ||
-        any(colour_quantiles < 0) ||
-        any(colour_quantiles > 1) ||
-        colour_quantiles[1] >= colour_quantiles[2]) {
+
+    if (
+      !is.numeric(colour_quantiles) ||
+      length(colour_quantiles) != 2L ||
+      anyNA(colour_quantiles) ||
+      any(!is.finite(colour_quantiles)) ||
+      any(colour_quantiles < 0) ||
+      any(colour_quantiles > 1) ||
+      colour_quantiles[1] >= colour_quantiles[2]
+    ) {
       stop(
         paste0(
           "`colour_quantiles` must contain two increasing numbers ",
@@ -274,6 +360,10 @@ publish_dotplot <- function(
       )
     }
   }
+
+  # ---------------------------------------------------------------------------
+  # Build dot plot
+  # ---------------------------------------------------------------------------
 
   plot <- Seurat::DotPlot(
     object = object,
@@ -289,13 +379,22 @@ publish_dotplot <- function(
     scale.max = scale_max
   )
 
+  # ---------------------------------------------------------------------------
+  # Apply feature order
+  # ---------------------------------------------------------------------------
+
   if (!is.null(feature_order)) {
+
     plot$data$features.plot <- factor(
       as.character(plot$data$features.plot),
       levels = feature_order
     )
+
   } else {
-    feature_levels <- unique(flattened_features)
+
+    feature_levels <- unique(
+      flattened_features
+    )
 
     plot$data$features.plot <- factor(
       as.character(plot$data$features.plot),
@@ -303,7 +402,12 @@ publish_dotplot <- function(
     )
   }
 
+  # ---------------------------------------------------------------------------
+  # Apply group order
+  # ---------------------------------------------------------------------------
+
   if (!is.null(group_order)) {
+
     observed_groups <- unique(
       as.character(plot$data$id)
     )
@@ -318,25 +422,28 @@ publish_dotplot <- function(
         paste0(
           "The following `group_order` values were not found in the ",
           "plot data: ",
-          paste(missing_groups, collapse = ", "),
+          paste(
+            missing_groups,
+            collapse = ", "
+          ),
           "."
         ),
         call. = FALSE
       )
     }
 
-    remaining_groups <- setdiff(
-      observed_groups,
-      group_order
-    )
-
-    plot$data$id <- factor(
-      as.character(plot$data$id),
-      levels = c(group_order, remaining_groups)
+    plot$data$id <- .apply_group_order(
+      x = plot$data$id,
+      order = group_order
     )
   }
 
+  # ---------------------------------------------------------------------------
+  # Determine colour limits
+  # ---------------------------------------------------------------------------
+
   expression_values <- plot$data$avg.exp.scaled
+
   expression_values <- expression_values[
     is.finite(expression_values)
   ]
@@ -349,8 +456,11 @@ publish_dotplot <- function(
   }
 
   if (!is.null(colour_limits)) {
+
     effective_colour_limits <- colour_limits
+
   } else if (!is.null(colour_quantiles)) {
+
     effective_colour_limits <- as.numeric(
       stats::quantile(
         expression_values,
@@ -361,22 +471,28 @@ publish_dotplot <- function(
       )
     )
 
-    if (effective_colour_limits[1] ==
-        effective_colour_limits[2]) {
+    if (
+      effective_colour_limits[1] ==
+      effective_colour_limits[2]
+    ) {
       effective_colour_limits <- range(
         expression_values,
         finite = TRUE
       )
     }
+
   } else {
+
     effective_colour_limits <- range(
       expression_values,
       finite = TRUE
     )
   }
 
-  if (effective_colour_limits[1] ==
-      effective_colour_limits[2]) {
+  if (
+    effective_colour_limits[1] ==
+    effective_colour_limits[2]
+  ) {
     expansion <- max(
       abs(effective_colour_limits[1]) * 0.01,
       0.01
@@ -387,6 +503,10 @@ publish_dotplot <- function(
       effective_colour_limits[2] + expansion
     )
   }
+
+  # ---------------------------------------------------------------------------
+  # Apply colour scale
+  # ---------------------------------------------------------------------------
 
   plot <- suppressMessages(
     plot +
@@ -401,6 +521,10 @@ publish_dotplot <- function(
       )
   )
 
+  # ---------------------------------------------------------------------------
+  # Apply dot-size scale
+  # ---------------------------------------------------------------------------
+
   plot <- suppressMessages(
     plot +
       ggplot2::scale_size(
@@ -409,6 +533,10 @@ publish_dotplot <- function(
         name = "Percent\nexpressed"
       )
   )
+
+  # ---------------------------------------------------------------------------
+  # Apply publication theme
+  # ---------------------------------------------------------------------------
 
   plot <- plot +
     theme_ueno_scRNA(
@@ -447,8 +575,19 @@ publish_dotplot <- function(
       )
     )
 
+  # ---------------------------------------------------------------------------
+  # Rotate feature labels
+  # ---------------------------------------------------------------------------
+
   if (isTRUE(rotate_features)) {
-    horizontal_justification <- if (feature_angle >= 0) 1 else 0
+
+    horizontal_justification <- if (
+      feature_angle >= 0
+    ) {
+      1
+    } else {
+      0
+    }
 
     plot <- plot +
       ggplot2::theme(

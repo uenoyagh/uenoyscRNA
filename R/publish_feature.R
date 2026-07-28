@@ -59,9 +59,7 @@ publish_feature <- function(
     base_size = 11,
     base_family = ""
 ) {
-  if (!inherits(object, "Seurat")) {
-    stop("`object` must be a Seurat object.", call. = FALSE)
-  }
+  .validate_seurat_object(object)
 
   if (!is.character(features) ||
       length(features) < 1L ||
@@ -152,18 +150,12 @@ publish_feature <- function(
     )
   }
 
-  metadata_columns <- colnames(object[[]])
-
-  if (!is.null(split.by) && !split.by %in% metadata_columns) {
-    stop(
-      paste0(
-        "`split.by = \"",
-        split.by,
-        "\"` was not found in object metadata."
-      ),
-      call. = FALSE
-    )
-  }
+  .validate_metadata_column(
+    object = object,
+    column = split.by,
+    arg = "split.by",
+    allow_null = TRUE
+  )
 
   if (isTRUE(raster) &&
       isTRUE(order) &&

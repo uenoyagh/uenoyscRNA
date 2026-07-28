@@ -4,3 +4,24 @@
 .httr-oauth
 .DS_Store
 .quarto
+
+# R session files
+.Ruserdata
+# RStudio
+.Rproj.user/
+# R package build/check output
+*.Rcheck/
+*.tar.gz
+# macOS
+# Local analysis data and large files
+*.rds
+*.RDS
+*.h5
+*.h5ad
+*.loom
+*.mtx
+*.mtx.gz
+# Local output directories
+output/
+results/
+figures/
