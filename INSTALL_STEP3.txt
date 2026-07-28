@@ -1,0 +1,34 @@
+uenoyscRNA v0.4.0 Step 3: Marker Registry
+
+Copy these files into the package root:
+
+R/marker_registry.R
+inst/extdata/mouse_liver_marker_registry.csv
+inst/extdata/human_liver_marker_registry.csv
+tests/testthat/test-marker-registry.R
+
+Then run in R:
+
+devtools::document()
+devtools::test(filter = "marker-registry")
+devtools::load_all()
+
+Example:
+
+mouse_path <- system.file(
+  "extdata",
+  "mouse_liver_marker_registry.csv",
+  package = "uenoyscRNA"
+)
+
+mouse_markers <- read_marker_registry(mouse_path)
+
+get_markers(
+  mouse_markers,
+  species = "Mouse",
+  tissue = "Liver",
+  layer = "Layer2",
+  celltype = "Resident Kupffer-like"
+)
+
+Do not copy this instruction file into the package repository.
