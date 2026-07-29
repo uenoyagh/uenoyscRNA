@@ -219,6 +219,8 @@ detect_review_assay <- function(object, assay = NULL) {
 #' @param condition_column Optional explicit condition column.
 #' @param reduction Optional explicit reduction.
 #' @param assay Optional explicit assay.
+#' @param require_reduction Logical; require and detect a dimensional reduction.
+#'   Set to `FALSE` for functions, such as DotPlot, that do not use one.
 #'
 #' @return A list of detected settings and candidate rankings.
 #' @export
@@ -228,7 +230,8 @@ detect_review_settings <- function(
     sample_column = NULL,
     condition_column = NULL,
     reduction = NULL,
-    assay = NULL
+    assay = NULL,
+    require_reduction = TRUE
 ) {
   metadata <- detect_review_metadata(
     object = object,
@@ -237,10 +240,19 @@ detect_review_settings <- function(
     condition_column = condition_column
   )
 
-  reduction_result <- detect_review_reduction(
-    object = object,
-    reduction = reduction
-  )
+  if (!is.logical(require_reduction) || length(require_reduction) != 1L ||
+      is.na(require_reduction)) {
+    stop("`require_reduction` must be TRUE or FALSE.", call. = FALSE)
+  }
+
+  if (isTRUE(require_reduction)) {
+    reduction_result <- detect_review_reduction(
+      object = object,
+      reduction = reduction
+    )
+  } else {
+    reduction_result <- list(reduction = NULL, candidates = character())
+  }
 
   assay_result <- detect_review_assay(
     object = object,

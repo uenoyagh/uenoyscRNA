@@ -1,0 +1,40 @@
+uenoyscRNA Step 5B — Marker DotPlot Review
+
+Files
+-----
+R/review_marker_dotplot.R
+tests/testthat/helper-review-marker-dotplot.R
+tests/testthat/test-review-marker-dotplot.R
+INTEGRATION_PATCH.txt
+
+Installation
+------------
+1. Copy R/review_marker_dotplot.R into the package R/ directory.
+2. Copy the two test files into tests/testthat/.
+3. Apply INTEGRATION_PATCH.txt to R/review_annotation.R.
+4. Run:
+
+devtools::document()
+devtools::test(filter = "review", reporter = "summary")
+devtools::load_all()
+
+Minimal test
+------------
+markers <- list(
+  Resident_Kupffer = c("Clec4f", "Timd4", "Vsig4", "Marco"),
+  Monocyte = c("Ly6c2", "Ccr2", "S100a8", "S100a9"),
+  Inflammatory = c("Il1b", "Tnf", "Ccl2", "Cxcl10"),
+  M2_like = c("Mrc1", "Cd163", "Maf", "Il10"),
+  SPP1_TREM2 = c("Spp1", "Trem2", "Gpnmb", "Lgals3")
+)
+
+dotplot_result <- review_marker_dotplot(
+  object = seurat_object,
+  markers = markers,
+  annotation_column = "celltype_for_R8plot_FIXED2",
+  assay = "RNA",
+  output_dir = "annotation_review/DotPlot"
+)
+
+dotplot_result
+file.exists(dotplot_result$files)

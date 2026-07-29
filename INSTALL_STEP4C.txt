@@ -1,0 +1,71 @@
+uenoyscRNA v0.5.0 Step 4C: Review Summary Dashboard
+
+Files
+-----
+R/review_summary.R
+tests/testthat/test-review-summary.R
+
+Installation
+------------
+1. Confirm the current branch:
+
+git branch --show-current
+
+Recommended branch:
+feature/review-engine
+
+2. Copy:
+R/review_summary.R
+to the package R directory.
+
+3. Copy:
+tests/testthat/test-review-summary.R
+to:
+tests/testthat/test-review-summary.R
+
+4. Run in RStudio:
+
+devtools::document()
+devtools::test(filter = "review", reporter = "summary")
+devtools::load_all()
+
+5. Test with the current Seurat object:
+
+summary_result <- review_summary(seurat_object)
+summary_result
+
+6. Inspect components:
+
+summary_result$settings
+summary_result$counts
+summary_result$values
+summary_result$warnings
+summary_result$low_marker_coverage
+
+7. Export CSV summaries:
+
+written_files <- write_review_summary(
+  summary_result,
+  output_dir = file.path(
+    "annotation_review",
+    "summary"
+  )
+)
+
+written_files
+
+Expected automatic settings for the current object:
+- annotation_column: celltype_for_R8plot_FIXED2
+- sample_column: sample_display_FIXED2
+- condition_column: condition_FIXED2
+- reduction: umapRPCA
+- assay: current default assay
+
+Git commands after tests pass
+-----------------------------
+
+git add R/review_summary.R tests/testthat/test-review-summary.R NAMESPACE man
+git commit -m "Add review summary dashboard"
+git push
+
+Do not copy INSTALL_STEP4C.txt into the repository.

@@ -16,10 +16,9 @@ read_annotation_registry <- function(path, validate = TRUE) {
     path,
     stringsAsFactors = FALSE,
     check.names = FALSE,
-    na.strings = c("", "NA")
+    na.strings = c("", "NA"),
+    colClasses = "character"
   )
-
-  registry$cluster <- as.character(registry$cluster)
 
   if (isTRUE(validate)) {
     validate_annotation_registry(registry)

@@ -1,0 +1,61 @@
+# Step 5B integration patch for review_annotation.R
+
+# 1. Add these parameters to review_annotation():
+#
+# markers = NULL,
+# split_by = NULL,
+# dot_scale = 6,
+# max_features_per_plot = 40L,
+#
+# 2. After umap_result <- review_umap(...), add:
+
+dotplot_dir <- file.path(output_dir, "DotPlot")
+
+dotplot_result <- review_marker_dotplot(
+  object = object,
+  markers = markers,
+  marker_registry = marker_registry,
+  annotation_column = summary_result$settings$annotation_column,
+  assay = summary_result$settings$assay,
+  species = species,
+  tissue = tissue,
+  layer = layer,
+  split_by = split_by,
+  dot_scale = dot_scale,
+  max_features_per_plot = max_features_per_plot,
+  output_dir = dotplot_dir,
+  width = max(width, 12),
+  height = max(height, 8)
+)
+
+# 3. Replace manifest construction with:
+
+manifest <- data.frame(
+  category = c(
+    rep("summary", length(summary_files)),
+    rep("umap", length(umap_result$files)),
+    rep("dotplot", length(dotplot_result$files))
+  ),
+  name = c(
+    names(summary_files),
+    names(umap_result$files),
+    names(dotplot_result$files)
+  ),
+  path = c(
+    unname(summary_files),
+    unname(umap_result$files),
+    unname(dotplot_result$files)
+  ),
+  stringsAsFactors = FALSE
+)
+
+# 4. Add DotPlot result to the result list:
+
+result <- list(
+  summary = summary_result,
+  umap = umap_result,
+  dotplot = dotplot_result,
+  manifest = manifest,
+  manifest_path = manifest_path,
+  output_dir = output_dir
+)

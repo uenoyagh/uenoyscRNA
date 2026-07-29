@@ -1,38 +1,31 @@
 Package: uenoyscRNA
 Type: Package
-Title: Publication-Quality Single-Cell RNA-Seq Visualization and Analysis Framework
-Version: 0.0.1
-Authors@R:
-    person(
-        given = "Yasuharu",
-        family = "Ueno",
-        email = "uenoya@ims.u-tokyo.ac.jp",
-        role = c("aut", "cre")
-    )
-Description: Provides a reproducible framework for publication-quality
-    single-cell RNA sequencing analysis using Seurat. The package standardizes
-    visualization, input validation, file output, module score analysis,
-    differential expression analysis, pseudobulk analysis, and related
-    utilities for biomedical research.
+Title: Reproducible Single-Cell RNA-Seq Review Utilities
+Version: 0.8.1
+Authors@R: person("Yasuharu", "Ueno", role = c("aut", "cre"), email = "yasuharu.ueno@example.org")
+Description: Utilities for reproducible review of Seurat single-cell RNA-seq
+    objects, including annotation registries, marker registries, palettes,
+    review summaries, UMAP plots, FeaturePlots, and marker DotPlots. Plotting
+    functions support source-RDS and analysis-date provenance footers.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
-Depends:
-    R (>= 4.6.0)
+LazyData: false
+Depends: R (>= 4.3.0)
 Imports:
     ggplot2,
     grDevices,
+    grid,
     patchwork,
+    rlang,
     scales,
     Seurat,
-    SeuratObject
+    SeuratObject,
+    stats,
+    utils
 Suggests:
     ggrastr,
-    knitr,
-    rmarkdown,
+    Matrix,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://github.com/YOUR_GITHUB/uenoyscRNA
-BugReports: https://github.com/YOUR_GITHUB/uenoyscRNA/issues
+Roxygen: list(markdown = TRUE)
 Config/roxygen2/version: 8.0.0

@@ -1,27 +1,140 @@
-.Rproj.user
+# ============================================================
+# macOS
+# ============================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ============================================================
+# R / RStudio
+# ============================================================
 .Rhistory
 .RData
-.httr-oauth
-.DS_Store
-.quarto
-
-# R session files
 .Ruserdata
-# RStudio
+.Rapp.history
 .Rproj.user/
-# R package build/check output
-*.Rcheck/
-*.tar.gz
-# macOS
-# Local analysis data and large files
+*.Rproj.user
+.Renviron
+.Rprofile.local
+
+# Local R package libraries and caches
+renv/library/
+renv/staging/
+renv/python/
+renv/cache/
+.Rcache/
+.cache/
+
+# Keep reproducibility files
+!renv.lock
+!renv/activate.R
+!renv/settings.json
+
+# ============================================================
+# Local configuration and credentials
+# ============================================================
+config/local_config.R
+config/*_local.R
+config/secrets.R
+config/credentials.R
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+token.json
+secrets.json
+
+# Example/template local configuration may be committed
+!config/local_config.example.R
+!config/example_local_config.R
+
+# ============================================================
+# scRNA-seq data and large binary objects
+# ============================================================
 *.rds
 *.RDS
+*.rda
+*.RData
 *.h5
 *.h5ad
+*.h5seurat
 *.loom
 *.mtx
 *.mtx.gz
-# Local output directories
-output/
+*.bam
+*.bai
+*.cram
+*.crai
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+
+# Matrix directories and raw data
+filtered_feature_bc_matrix/
+raw_feature_bc_matrix/
+outs/
+data/
+raw_data/
+external_data/
+input_data/
+
+# ============================================================
+# Analysis outputs
+# ============================================================
 results/
+analysis_results/
+output/
+outputs/
 figures/
+plots/
+tables/
+reports/
+logs/
+tmp/
+temp/
+cache/
+
+# Common generated formats
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.tiff
+*.tif
+*.svg
+*.html
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+
+# Permit intentionally versioned documentation assets
+!README/**/*.png
+!README/**/*.jpg
+!README/**/*.jpeg
+!README/**/*.svg
+!docs/**/*.png
+!docs/**/*.jpg
+!docs/**/*.jpeg
+!docs/**/*.svg
+
+# ============================================================
+# IDE and editor files
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

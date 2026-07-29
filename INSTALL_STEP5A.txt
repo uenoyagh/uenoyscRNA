@@ -1,0 +1,71 @@
+uenoyscRNA v0.6.0 Step 5A: Annotation Review Plots
+
+Added functions
+---------------
+review_umap()
+review_annotation()
+print.uenoy_annotation_review()
+
+Files
+-----
+R/review_annotation.R
+tests/testthat/test-review-annotation.R
+
+Installation
+------------
+1. Confirm branch:
+
+git branch --show-current
+
+Recommended:
+feature/review-engine
+
+2. Copy R/review_annotation.R into the package R directory.
+
+3. Copy tests/testthat/test-review-annotation.R into tests/testthat.
+
+4. Run in RStudio:
+
+devtools::document()
+devtools::test(filter = "review", reporter = "summary")
+devtools::load_all()
+
+5. Run on the current Seurat object:
+
+review_result <- review_annotation(
+  seurat_object,
+  output_dir = "annotation_review"
+)
+
+review_result
+review_result$manifest
+
+Expected output
+---------------
+annotation_review/
+├── Summary/
+│   ├── settings.csv
+│   ├── values.csv
+│   └── warnings.csv
+├── UMAP/
+│   ├── UMAP_by_annotation.pdf
+│   ├── UMAP_by_sample.pdf
+│   └── UMAP_by_condition.pdf
+└── review_manifest.csv
+
+Optional palette use
+--------------------
+review_result <- review_annotation(
+  seurat_object,
+  palette = mouse_palette,
+  point_size = 0.8,
+  output_dir = "annotation_review"
+)
+
+Git commands
+------------
+git add R/review_annotation.R tests/testthat/test-review-annotation.R NAMESPACE man
+git commit -m "Add annotation review UMAP workflow"
+git push
+
+Do not copy INSTALL_STEP5A.txt into the repository.
