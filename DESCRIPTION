@@ -1,11 +1,11 @@
 Package: uenoyscRNA
 Type: Package
 Title: Reproducible Single-Cell RNA-Seq Review Utilities
-Version: 0.8.1
+Version: 4.0.0
 Authors@R: person("Yasuharu", "Ueno", role = c("aut", "cre"), email = "yasuharu.ueno@example.org")
 Description: Utilities for reproducible review of Seurat single-cell RNA-seq
     objects, including annotation registries, marker registries, palettes,
-    review summaries, UMAP plots, FeaturePlots, and marker DotPlots. Plotting
+    review summaries, shared metadata detection, project-wide RDS discovery, dataset registries, cell-fraction analysis, UMAP plots, FeaturePlots, and marker DotPlots. Plotting
     functions support source-RDS and analysis-date provenance footers.
 License: MIT + file LICENSE
 Encoding: UTF-8

@@ -1,3 +1,8 @@
+export(summarize_dataset_registry)
+export(resolve_dataset_rds)
+export(discover_rds_files)
+export(write_metadata_detection_report)
+export(detect_metadata)
 export(as_review_tables)
 export(check_review_metadata)
 export(create_review_manifest)
