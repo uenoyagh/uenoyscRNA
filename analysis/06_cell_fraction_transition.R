@@ -1,14 +1,31 @@
 # ============================================================
 # 06_cell_fraction_transition.R
 # Generic cell/cluster fraction transition pipeline
-# uenoy scRNAseq Framework v3.0
+# uenoy scRNAseq Framework v4.0
 # ============================================================
 
 rm(list = ls())
 gc()
 
-script_root <- "/Users/uenoya/Projects/uenoyscRNA"
+script_root <- Sys.getenv(
+  "UENOY_SCRNA_ROOT",
+  unset = "/Users/uenoya/Projects/uenoyscRNA"
+)
+if (!dir.exists(script_root)) {
+  candidate <- normalizePath(getwd(), mustWork = FALSE)
+  if (file.exists(file.path(candidate, "DESCRIPTION")) &&
+      dir.exists(file.path(candidate, "R"))) {
+    script_root <- candidate
+  } else {
+    stop(
+      "Framework root was not found. Set UENOY_SCRNA_ROOT or run from ",
+      "the uenoyscRNA project root.",
+      call. = FALSE
+    )
+  }
+}
 
+source(file.path(script_root, "R", "rds_registry.R"))
 source(file.path(script_root, "config", "project_config.R"))
 source(file.path(script_root, "config", "local_config.R"))
 source(file.path(script_root, "config", "cell_fraction_config.R"))
@@ -16,6 +33,8 @@ source(file.path(script_root, "R", "io.R"))
 source(file.path(script_root, "R", "utils.R"))
 source(file.path(script_root, "R", "cell_fraction_engine.R"))
 source(file.path(script_root, "R", "cell_fraction_plot.R"))
+
+`%||%` <- function(x, y) if (is.null(x)) y else x
 
 required_packages <- c("Seurat", "SeuratObject", "ggplot2")
 missing_packages <- required_packages[
@@ -37,8 +56,6 @@ if (length(targets) == 0L) stop("cell_fraction_analysis_targets is empty.")
 
 for (target_index in seq_along(targets)) {
   analysis_target <- targets[[target_index]]
-  target_dir <- get_dataset_dir(analysis_target)
-
   profile <- cf_get_profile(
     analysis_target,
     cell_fraction_profiles,
@@ -71,9 +88,13 @@ for (target_index in seq_along(targets)) {
     showWarnings = FALSE
   ))
 
-  rds_files <- list_rds_files(target_dir, recursive = FALSE)
+  rds_files <- get_dataset_files(analysis_target, strict = FALSE)
   if (length(rds_files) == 0L) {
-    warning("No RDS files found in: ", target_dir)
+    warning(
+      "Dataset registry could not resolve an RDS for: ", analysis_target,
+      ". Review config/project_config.R or run analysis/01_inventory_RDS.R.",
+      call. = FALSE
+    )
     next
   }
 
@@ -120,7 +141,11 @@ for (target_index in seq_along(targets)) {
       feature_candidates = profile$feature_candidates,
       parent_candidates = profile$parent_candidates,
       condition_candidates = profile$condition_candidates,
-      sample_candidates = profile$sample_candidates
+      sample_candidates = profile$sample_candidates,
+      feature_patterns = profile$feature_patterns %||% NULL,
+      parent_patterns = profile$parent_patterns %||% NULL,
+      condition_patterns = profile$condition_patterns %||% NULL,
+      sample_patterns = profile$sample_patterns %||% NULL
     )
 
     message(
@@ -175,13 +200,13 @@ for (target_index in seq_along(targets)) {
       parent_df,
       file.path(plot_dirs[[7]], paste0(prefix, "_parent_fraction_table.csv"))
     )
+    metadata_report <- cf_metadata_detection_report(object, columns)
+    metadata_report$rds_name <- rds_name
+    metadata_report$analysis_target <- analysis_target
+    metadata_report$profile_name <- profile$profile_name
     write_csv_safe_local(
-      data.frame(
-        role = names(columns),
-        column = unlist(columns, use.names = FALSE),
-        stringsAsFactors = FALSE
-      ),
-      file.path(plot_dirs[[7]], paste0(prefix, "_resolved_metadata_columns.csv"))
+      metadata_report,
+      file.path(plot_dirs[[8]], paste0(prefix, "_metadata_detection.csv"))
     )
     write_csv_safe_local(
       cf_qc_summary(md, rds_name, analysis_target, profile$profile_name),

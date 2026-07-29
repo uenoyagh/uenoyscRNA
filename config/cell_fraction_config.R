@@ -1,6 +1,6 @@
 # ============================================================
 # Generic cell-fraction configuration
-# uenoy scRNAseq Framework v3.0
+# uenoy scRNAseq Framework v4.0
 # ============================================================
 
 # Run one or more of the four active dataset directories.
@@ -13,7 +13,7 @@ cell_fraction_analysis_targets <- c(
 
 # Output below get_result_root(dataset_name).
 cell_fraction_result_folder <- "09_cell_fraction"
-cell_fraction_run_folder <- "cell_fraction_transition_v3.0"
+cell_fraction_run_folder <- "cell_fraction_transition_v4.0"
 
 # Plot switches.
 cell_fraction_make_line_total <- TRUE
@@ -55,21 +55,15 @@ if (!exists("overwrite_existing")) overwrite_existing <- FALSE
 # ------------------------------------------------------------
 
 cf_cluster_candidates <- c(
-  "integratedRPCA_snn_res.3.0",
-  "integratedRPCA_snn_res.3",
-  "integrated_snn_res.3.0",
-  "RNA_snn_res.3.0",
-  "RNA_snn_res.3",
   "seurat_clusters",
   "cluster",
-  "Cluster",
-  "res3.0",
-  "res3"
+  "Cluster"
 )
 
 cf_annotation_candidates <- c(
-  "annotation_group",
+  "feature_annotation_added",
   "annotation_group_final",
+  "annotation_group",
   "cell_annotation",
   "celltype",
   "cell_type",
@@ -102,6 +96,44 @@ cf_sample_candidates <- c(
   "orig.ident"
 )
 
+
+# Pattern-based fallback. Exact candidates above always have priority.
+cf_cluster_patterns <- c(
+  "^integratedRPCA_snn_res\\.",
+  "^integrated_snn_res\\.",
+  "^RNA_snn_res\\.",
+  "^SCT_snn_res\\.",
+  "^Harmony_snn_res\\.",
+  "^.*_snn_res\\.",
+  "^res[._]?[0-9]"
+)
+
+cf_annotation_patterns <- c(
+  "feature.*annotation",
+  "annotation",
+  "cell.?type",
+  "^layer[12]$"
+)
+
+cf_condition_patterns <- c(
+  "^NAS$",
+  "condition",
+  "group",
+  "treatment",
+  "diet",
+  "disease",
+  "status"
+)
+
+cf_sample_patterns <- c(
+  "^sample$",
+  "sample.?id",
+  "orig\\.ident",
+  "donor",
+  "patient",
+  "replicate"
+)
+
 # ------------------------------------------------------------
 # Dataset-specific profiles
 #
@@ -126,8 +158,12 @@ cell_fraction_profiles <- list(
     sample_column_override = NULL,
     feature_candidates = cf_annotation_candidates,
     parent_candidates = cf_annotation_candidates,
+    feature_patterns = cf_annotation_patterns,
+    parent_patterns = cf_annotation_patterns,
     condition_candidates = cf_condition_candidates,
     sample_candidates = cf_sample_candidates,
+    condition_patterns = cf_condition_patterns,
+    sample_patterns = cf_sample_patterns,
     condition_order = c("STD", "CDAHFD", "Sham", "Tx"),
     condition_regex_map = c(
       "STD" = "STD",
@@ -153,8 +189,12 @@ cell_fraction_profiles <- list(
     sample_column_override = NULL,
     feature_candidates = cf_cluster_candidates,
     parent_candidates = cf_annotation_candidates,
+    feature_patterns = cf_cluster_patterns,
+    parent_patterns = cf_annotation_patterns,
     condition_candidates = cf_condition_candidates,
     sample_candidates = cf_sample_candidates,
+    condition_patterns = cf_condition_patterns,
+    sample_patterns = cf_sample_patterns,
     condition_order = c("STD", "CDAHFD", "Sham", "Tx"),
     condition_regex_map = c(
       "STD" = "STD",
@@ -180,6 +220,8 @@ cell_fraction_profiles <- list(
     sample_column_override = NULL,
     feature_candidates = cf_annotation_candidates,
     parent_candidates = cf_annotation_candidates,
+    feature_patterns = cf_annotation_patterns,
+    parent_patterns = cf_annotation_patterns,
     condition_candidates = c(
       "NAS",
       "nas",
@@ -190,6 +232,8 @@ cell_fraction_profiles <- list(
       "orig.ident"
     ),
     sample_candidates = cf_sample_candidates,
+    condition_patterns = cf_condition_patterns,
+    sample_patterns = cf_sample_patterns,
     condition_order = c("0", "1", "2", "3", "4", "5", "6"),
     condition_regex_map = NULL,
     include_features = NULL,
@@ -210,6 +254,8 @@ cell_fraction_profiles <- list(
     sample_column_override = NULL,
     feature_candidates = cf_cluster_candidates,
     parent_candidates = cf_annotation_candidates,
+    feature_patterns = cf_cluster_patterns,
+    parent_patterns = cf_annotation_patterns,
     condition_candidates = c(
       "NAS",
       "nas",
@@ -220,6 +266,8 @@ cell_fraction_profiles <- list(
       "orig.ident"
     ),
     sample_candidates = cf_sample_candidates,
+    condition_patterns = cf_condition_patterns,
+    sample_patterns = cf_sample_patterns,
     condition_order = c("0", "1", "2", "3", "4", "5", "6"),
     condition_regex_map = NULL,
     include_features = NULL,

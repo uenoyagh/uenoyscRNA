@@ -26,6 +26,7 @@ detect_review_metadata <- function(
   annotation_candidates <- .rank_review_columns(
     metadata_columns,
     preferred = c(
+      "feature_annotation_added",
       "celltype_for_R8plot_FIXED2",
       "celltype_for_R8plot",
       "celltype_annotation",
@@ -36,6 +37,7 @@ detect_review_metadata <- function(
       "layer1"
     ),
     patterns = c(
+      "^feature_annotation_added$",
       "^celltype_for_R8plot_FIXED[0-9]+$",
       "^celltype_for_R8plot$",
       "celltype.*annotation",
@@ -44,7 +46,7 @@ detect_review_metadata <- function(
       "layer2",
       "layer1"
     ),
-    exclude_patterns = c("confidence", "feature_annotation", "cluster")
+    exclude_patterns = c("confidence", "cluster")
   )
 
   sample_candidates <- .rank_review_columns(

@@ -1,6 +1,6 @@
 # ============================================================
 # Generic cell-fraction calculation engine
-# uenoy scRNAseq Framework v3.0
+# uenoy scRNAseq Framework v3.1
 # ============================================================
 
 cf_safe_filename <- function(x) {
@@ -31,38 +31,91 @@ cf_order_factor <- function(x, preferred = NULL) {
   factor(values, levels = unique(levels_out))
 }
 
+cf_extract_resolution <- function(column_name) {
+  value <- sub("^.*(?:res\\.|res_)", "", column_name, perl = TRUE)
+  suppressWarnings(as.numeric(value))
+}
+
+cf_rank_pattern_hits <- function(hits, role = NULL) {
+  hits <- unique(hits)
+  if (length(hits) <= 1L) return(hits)
+
+  if (!identical(role, "feature") && !identical(role, "cluster")) {
+    return(hits)
+  }
+
+  resolution <- vapply(hits, cf_extract_resolution, numeric(1))
+  has_resolution <- !is.na(resolution)
+  unique(c(
+    hits[has_resolution][order(resolution[has_resolution], decreasing = TRUE)],
+    hits[!has_resolution]
+  ))
+}
+
 cf_resolve_metadata_column <- function(
     object,
     override = NULL,
-    candidates,
+    candidates = character(),
+    patterns = NULL,
     role,
     required = TRUE) {
 
   available <- colnames(object[[]])
 
-  if (!is.null(override)) {
+  if (!is.null(override) && length(override) == 1L && nzchar(override)) {
     if (!override %in% available) {
       stop(
         "Configured ", role, " column not found: ", override,
-        "\nAvailable columns: ", paste(available, collapse = ", ")
+        "\nAvailable columns: ", paste(available, collapse = ", "),
+        call. = FALSE
       )
     }
-    return(override)
+    return(list(
+      column = override,
+      source = "override",
+      candidates = override
+    ))
   }
 
-  hit <- candidates[candidates %in% available]
-  if (length(hit) == 0L) {
+  exact_hits <- candidates[candidates %in% available]
+  pattern_hits <- character()
+
+  if (!is.null(patterns) && length(patterns) > 0L) {
+    for (pattern in patterns) {
+      pattern_hits <- c(
+        pattern_hits,
+        grep(pattern, available, value = TRUE, ignore.case = TRUE, perl = TRUE)
+      )
+    }
+  }
+
+  hits <- unique(c(exact_hits, pattern_hits))
+  hits <- cf_rank_pattern_hits(hits, role = role)
+
+  if (length(hits) == 0L) {
     if (isTRUE(required)) {
       stop(
         "No suitable ", role, " column was found.",
-        "\nCandidates: ", paste(candidates, collapse = ", "),
-        "\nAvailable columns: ", paste(available, collapse = ", ")
+        "\nExact candidates: ",
+        if (length(candidates)) paste(candidates, collapse = ", ") else "<none>",
+        "\nPatterns: ",
+        if (length(patterns)) paste(patterns, collapse = ", ") else "<none>",
+        "\nAvailable columns: ", paste(available, collapse = ", "),
+        call. = FALSE
       )
     }
-    return(NA_character_)
+    return(list(
+      column = NA_character_,
+      source = "not_found",
+      candidates = character()
+    ))
   }
 
-  hit[[1L]]
+  list(
+    column = hits[[1L]],
+    source = if (hits[[1L]] %in% exact_hits) "exact" else "pattern",
+    candidates = hits
+  )
 }
 
 cf_resolve_columns <- function(
@@ -74,32 +127,109 @@ cf_resolve_columns <- function(
     feature_candidates,
     parent_candidates,
     condition_candidates,
-    sample_candidates) {
+    sample_candidates,
+    feature_patterns = NULL,
+    parent_patterns = NULL,
+    condition_patterns = NULL,
+    sample_patterns = NULL) {
 
-  feature <- cf_resolve_metadata_column(
-    object, feature_override, feature_candidates, "feature", TRUE
+  feature_result <- cf_resolve_metadata_column(
+    object = object,
+    override = feature_override,
+    candidates = feature_candidates,
+    patterns = feature_patterns,
+    role = "feature",
+    required = TRUE
   )
 
-  parent <- cf_resolve_metadata_column(
-    object, parent_override, parent_candidates, "parent", FALSE
+  parent_result <- cf_resolve_metadata_column(
+    object = object,
+    override = parent_override,
+    candidates = parent_candidates,
+    patterns = parent_patterns,
+    role = "parent",
+    required = FALSE
   )
 
-  condition <- cf_resolve_metadata_column(
-    object, condition_override, condition_candidates, "condition", TRUE
+  condition_result <- cf_resolve_metadata_column(
+    object = object,
+    override = condition_override,
+    candidates = condition_candidates,
+    patterns = condition_patterns,
+    role = "condition",
+    required = TRUE
   )
 
-  sample <- cf_resolve_metadata_column(
-    object, sample_override, sample_candidates, "sample", FALSE
+  sample_result <- cf_resolve_metadata_column(
+    object = object,
+    override = sample_override,
+    candidates = sample_candidates,
+    patterns = sample_patterns,
+    role = "sample",
+    required = FALSE
   )
 
-  if (is.na(parent)) parent <- feature
+  if (is.na(parent_result$column)) {
+    parent_result <- feature_result
+    parent_result$source <- "fallback_to_feature"
+  }
 
-  list(
-    feature = feature,
-    parent = parent,
-    condition = condition,
-    sample = sample
+  columns <- list(
+    feature = feature_result$column,
+    parent = parent_result$column,
+    condition = condition_result$column,
+    sample = sample_result$column
   )
+
+  detection <- data.frame(
+    role = c("feature", "parent", "condition", "sample"),
+    selected_column = unlist(columns, use.names = FALSE),
+    detection_source = c(
+      feature_result$source,
+      parent_result$source,
+      condition_result$source,
+      sample_result$source
+    ),
+    alternatives = c(
+      paste(setdiff(feature_result$candidates, feature_result$column), collapse = " | "),
+      paste(setdiff(parent_result$candidates, parent_result$column), collapse = " | "),
+      paste(setdiff(condition_result$candidates, condition_result$column), collapse = " | "),
+      paste(setdiff(sample_result$candidates, sample_result$column), collapse = " | ")
+    ),
+    stringsAsFactors = FALSE
+  )
+
+  attr(columns, "detection_report") <- detection
+  columns
+}
+
+cf_metadata_detection_report <- function(object, columns) {
+  report <- attr(columns, "detection_report")
+  if (is.null(report)) {
+    report <- data.frame(
+      role = names(columns),
+      selected_column = unlist(columns, use.names = FALSE),
+      detection_source = NA_character_,
+      alternatives = NA_character_,
+      stringsAsFactors = FALSE
+    )
+  }
+
+  metadata <- object[[]]
+  report$selected_exists <- vapply(
+    report$selected_column,
+    function(column) !is.na(column) && column %in% colnames(metadata),
+    logical(1)
+  )
+  report$n_unique <- vapply(
+    report$selected_column,
+    function(column) {
+      if (is.na(column) || !column %in% colnames(metadata)) return(NA_integer_)
+      length(unique(metadata[[column]]))
+    },
+    integer(1)
+  )
+  report
 }
 
 cf_apply_regex_map <- function(x, regex_map = NULL) {
