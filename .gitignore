@@ -138,3 +138,49 @@ cache/
 *.swp
 *.swo
 *~
+
+# Large scRNA-seq data
+*.rds
+*.h5
+*.h5ad
+*.loom
+
+# Analysis outputs
+analysis/**/checkpoints/
+analysis/**/figures/
+analysis/**/tables/
+analysis/**/objects/
+analysis/**/logs/
+
+# Temporary and local files
+.DS_Store
+.Rhistory
+.RData
+.Rproj.user/
+renv/library/
+renv/staging/
+
+# R temporary files
+.RDataTmp
+.RData
+.Rhistory
+.Rproj.user/
+.DS_Store
+
+# Large single-cell objects
+*.rds
+*.RDS
+*.h5
+*.h5ad
+*.loom
+
+# Generated analysis results
+analysis/**/checkpoints/
+analysis/**/figures/
+analysis/**/tables/
+analysis/**/objects/
+analysis/**/logs/
+
+# renv local library
+renv/library/
+renv/staging/
