@@ -1,0 +1,132 @@
+# ============================================================
+# uenoyscRNA Framework v4.0.4
+# Legacy high-visibility palette
+# ============================================================
+
+ueno_lineage_palette_v404 <- c(
+  Biliary = "#E98A2E",
+  Cycling = "#B49A2A",
+  Endothelial = "#6FC2C4",
+  Erythroid = "#B96BA8",
+  Hepatocyte = "#B8CF72",
+  Lymphoid = "#78A6D1",
+  Mesenchymal = "#8FC276",
+  Myeloid = "#55AFA5",
+  Unknown = "#B5B5B5"
+)
+
+ueno_celltype_palette_v404 <- c(
+  Mature_hepatocyte = "#B8CF72",
+  Hepatic_progenitor = "#9DBA4C",
+  Cholangiocyte = "#E98A2E",
+  LSEC = "#6FC2C4",
+  Vascular_endothelial = "#5AA7C2",
+  Lymphatic_endothelial = "#67B7B0",
+  qHSC = "#8FC276",
+  aHSC = "#62A95C",
+  Portal_fibroblast = "#A58A45",
+  Pericyte_VSMC = "#81733F",
+  Kupffer_macrophage = "#55AFA5",
+  Monocyte_derived_macrophage = "#3E8F88",
+  Monocyte = "#4FA29B",
+  Neutrophil = "#86B7D2",
+  cDC1 = "#A48A45",
+  cDC2 = "#B59D58",
+  pDC = "#7E98C7",
+  Mast_cell = "#A8699F",
+  Basophil = "#D89BB1",
+  B_cell = "#E58E8E",
+  Plasma_cell = "#8C6BB7",
+  CD4_T_cell = "#D77D9C",
+  CD8_T_cell = "#D4B15B",
+  Treg = "#A85D8A",
+  Gamma_delta_T = "#8265B7",
+  NK_cell = "#7FA7D0",
+  NKT_cell = "#678CB8",
+  ILC = "#6C9F7C",
+  Erythroid = "#B96BA8",
+  Megakaryocyte = "#8C72B8",
+  Platelet = "#A990CC",
+  Cycling = "#B49A2A",
+  Unknown = "#B5B5B5"
+)
+
+ueno_subtype_palette_v404 <- c(
+  Mature_hepatocyte = "#B8CF72",
+  Periportal_hepatocyte = "#C6D96F",
+  Midzonal_hepatocyte = "#AFC65E",
+  Pericentral_hepatocyte = "#8EAA48",
+  Stress_response_hepatocyte = "#B4A14B",
+  IFN_response_hepatocyte = "#8AA56A",
+  Cycling_hepatocyte = "#B49A2A",
+
+  Biliary = "#E98A2E",
+  Cholangiocyte = "#E98A2E",
+  Reactive_cholangiocyte = "#D9781E",
+
+  LSEC = "#6FC2C4",
+  Vascular_endothelial = "#5AA7C2",
+  Periportal_LSEC = "#7AC9C2",
+  Pericentral_LSEC = "#5DB4B2",
+  Capillarized_LSEC = "#4A9EA2",
+  Angiogenic_LSEC = "#5AA7C2",
+  Inflammatory_LSEC = "#5F8FB1",
+
+  Mesenchymal = "#8FC276",
+  qHSC = "#8FC276",
+  aHSC = "#62A95C",
+  Early_activated_HSC = "#79B66B",
+  Myofibroblastic_aHSC = "#58A05B",
+  Fibrogenic_aHSC = "#4B8D4E",
+  Inflammatory_aHSC = "#6EA765",
+  Portal_fibroblast = "#A58A45",
+  Pericyte_VSMC = "#81733F",
+
+  Kupffer_macrophage = "#55AFA5",
+  Monocyte_derived_macrophage = "#3E8F88",
+  Resident_Kupffer_like = "#54AFA3",
+  Monocyte_like = "#3A8F88",
+  Inflammatory_M1_like = "#D36A7B",
+  Pro_resolution_M2_like = "#6B9D7C",
+  SPP1_TREM2_MASH_associated = "#A85D9B",
+  Lipid_associated_macrophage = "#8A6EB3",
+  Efferocytosis_phagocytosis_high = "#6E9E82",
+  IL10_response_high_Mphi = "#5D8D72",
+  Fibrosis_associated_Mphi = "#8F5A70",
+  IFN_response_macrophage = "#6F82B7",
+
+  Classical_monocyte = "#4FA29B",
+  Nonclassical_monocyte = "#3E8F88",
+  Neutrophil = "#86B7D2",
+  Inflammatory_neutrophil = "#86B7D2",
+  Aged_neutrophil = "#6F9CB8",
+
+  cDC1 = "#A48A45",
+  cDC2 = "#B59D58",
+  pDC = "#7E98C7",
+
+  Lymphoid = "#78A6D1",
+  B_cell = "#E58E8E",
+  Naive_B = "#EAA1A1",
+  Memory_B = "#D87474",
+  Plasma_cell = "#8C6BB7",
+
+  CD4_T_cell = "#D77D9C",
+  Naive_CD4_T = "#E2A3B8",
+  Activated_CD4_T = "#C96B91",
+  CD8_T_cell = "#D4B15B",
+  Naive_CD8_T = "#DDBE75",
+  Cytotoxic_CD8_T = "#C59B3F",
+  Exhausted_CD8_T = "#A27B2D",
+  NK_cell = "#7FA7D0",
+  Activated_NK = "#6F9BC7",
+  NKT_cell = "#678CB8",
+  Treg = "#A85D8A",
+  Gamma_delta_T = "#8265B7",
+
+  Basophil = "#D89BB1",
+  Mast_cell = "#A8699F",
+  Erythroid = "#B96BA8",
+  Cycling = "#B49A2A",
+  Unknown = "#B5B5B5"
+)
