@@ -827,9 +827,10 @@
     },
     "bitops": {
       "Package": "bitops",
-      "Version": "1.0-9",
+      "Version": "1.1-0",
       "Source": "Repository",
-      "Date": "2024-10-03",
+      "VersionNote": "Last CRAN: 1.0-9 on 2024-10-03",
+      "Date": "2026-07-30",
       "Authors@R": "c( person(\"Steve\", \"Dutky\", role = \"aut\", email = \"sdutky@terpalum.umd.edu\", comment = \"S original; then (after MM's port) revised and modified\"), person(\"Martin\", \"Maechler\", role = c(\"cre\", \"aut\"), email = \"maechler@stat.math.ethz.ch\", comment = c(\"Initial R port; tweaks\", ORCID = \"0000-0002-8685-9910\")))",
       "Title": "Bitwise Operations",
       "Description": "Functions for bitwise operations on integer vectors.",
@@ -837,13 +838,13 @@
       "URL": "https://github.com/mmaechler/R-bitops",
       "BugReports": "https://github.com/mmaechler/R-bitops/issues",
       "NeedsCompilation": "yes",
-      "Author": "Steve Dutky [aut] (S original; then (after MM's port) revised and modified), Martin Maechler [cre, aut] (Initial R port; tweaks, <https://orcid.org/0000-0002-8685-9910>)",
+      "Author": "Steve Dutky [aut] (S original; then (after MM's port) revised and modified), Martin Maechler [cre, aut] (Initial R port; tweaks, ORCID: <https://orcid.org/0000-0002-8685-9910>)",
       "Maintainer": "Martin Maechler <maechler@stat.math.ethz.ch>",
       "Repository": "CRAN"
     },
     "bslib": {
       "Package": "bslib",
-      "Version": "0.11.0",
+      "Version": "0.12.0",
       "Source": "Repository",
       "Title": "Custom 'Bootstrap' 'Sass' Themes for 'shiny' and 'rmarkdown'",
       "Authors@R": "c( person(\"Carson\", \"Sievert\", , \"carson@posit.co\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-4958-2844\")), person(\"Joe\", \"Cheng\", , \"joe@posit.co\", role = \"aut\"), person(\"Garrick\", \"Aden-Buie\", , \"garrick@posit.co\", role = \"aut\", comment = c(ORCID = \"0000-0002-7111-0077\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(, \"Bootstrap contributors\", role = \"ctb\", comment = \"Bootstrap library\"), person(, \"Twitter, Inc\", role = \"cph\", comment = \"Bootstrap library\"), person(\"Javi\", \"Aguilar\", role = c(\"ctb\", \"cph\"), comment = \"Bootstrap colorpicker library\"), person(\"Thomas\", \"Park\", role = c(\"ctb\", \"cph\"), comment = \"Bootswatch library\"), person(, \"PayPal\", role = c(\"ctb\", \"cph\"), comment = \"Bootstrap accessibility plugin\") )",
@@ -896,7 +897,7 @@
       "Config/testthat/parallel": "true",
       "Config/testthat/start-first": "zzzz-bs-sass, fonts, zzz-precompile, theme-*, rmd-*",
       "Encoding": "UTF-8",
-      "Collate": "'accordion.R' 'breakpoints.R' 'bs-current-theme.R' 'bs-dependencies.R' 'bs-global.R' 'bs-remove.R' 'bs-theme-layers.R' 'bs-theme-preset-bootswatch.R' 'bs-theme-preset-brand.R' 'bs-theme-preset-builtin.R' 'bs-theme-preset.R' 'utils.R' 'bs-theme-preview.R' 'bs-theme-update.R' 'bs-theme.R' 'bslib-package.R' 'buttons.R' 'card.R' 'deprecated.R' 'files.R' 'fill.R' 'imports.R' 'input-code-editor.R' 'input-dark-mode.R' 'input-submit.R' 'input-switch.R' 'layout.R' 'nav-items.R' 'nav-update.R' 'navbar_options.R' 'navs-legacy.R' 'navs.R' 'onLoad.R' 'page.R' 'popover.R' 'precompiled.R' 'print.R' 'shiny-devmode.R' 'sidebar.R' 'staticimports.R' 'toast.R' 'toolbar.R' 'tooltip.R' 'utils-deps.R' 'utils-shiny.R' 'utils-tags.R' 'value-box.R' 'version-default.R' 'versions.R'",
+      "Collate": "'accordion.R' 'breakpoints.R' 'bs-current-theme.R' 'bs-dependencies.R' 'bs-global.R' 'bs-remove.R' 'bs-theme-layers.R' 'bs-theme-preset-bootswatch.R' 'bs-theme-preset-brand.R' 'bs-theme-preset-builtin.R' 'bs-theme-preset.R' 'utils.R' 'bs-theme-preview.R' 'bs-theme-update.R' 'bs-theme.R' 'bslib-package.R' 'buttons.R' 'card.R' 'deprecated.R' 'files.R' 'fill.R' 'imports.R' 'input-code-editor.R' 'input-dark-mode.R' 'input-submit.R' 'input-switch.R' 'layout.R' 'nav-items.R' 'nav-update.R' 'navbar_options.R' 'navs-legacy.R' 'navs.R' 'offcanvas.R' 'onLoad.R' 'page.R' 'popover.R' 'precompiled.R' 'print.R' 'shiny-devmode.R' 'sidebar.R' 'staticimports.R' 'toast.R' 'toolbar.R' 'tooltip.R' 'utils-deps.R' 'utils-shiny.R' 'utils-tags.R' 'value-box.R' 'version-default.R' 'versions.R'",
       "NeedsCompilation": "no",
       "Author": "Carson Sievert [aut, cre] (ORCID: <https://orcid.org/0000-0002-4958-2844>), Joe Cheng [aut], Garrick Aden-Buie [aut] (ORCID: <https://orcid.org/0000-0002-7111-0077>), Posit Software, PBC [cph, fnd], Bootstrap contributors [ctb] (Bootstrap library), Twitter, Inc [cph] (Bootstrap library), Javi Aguilar [ctb, cph] (Bootstrap colorpicker library), Thomas Park [ctb, cph] (Bootswatch library), PayPal [ctb, cph] (Bootstrap accessibility plugin)",
       "Maintainer": "Carson Sievert <carson@posit.co>",
@@ -1577,6 +1578,56 @@
       "Author": "Winston Chang [aut, cre], Posit Software, PBC [cph, fnd], Tessil [cph] (hopscotch_map library)",
       "Maintainer": "Winston Chang <winston@posit.co>",
       "Repository": "CRAN"
+    },
+    "fgsea": {
+      "Package": "fgsea",
+      "Version": "1.38.0",
+      "Source": "Bioconductor",
+      "Priority": null,
+      "Depends": [
+        "R (>= 4.1)"
+      ],
+      "Imports": [
+        "Rcpp",
+        "data.table",
+        "BiocParallel",
+        "stats",
+        "ggplot2 (>= 2.2.0)",
+        "cowplot",
+        "grid",
+        "fastmatch",
+        "Matrix",
+        "scales",
+        "utils"
+      ],
+      "LinkingTo": [
+        "Rcpp",
+        "BH"
+      ],
+      "Suggests": [
+        "testthat",
+        "knitr",
+        "rmarkdown",
+        "reactome.db",
+        "AnnotationDbi",
+        "parallel",
+        "org.Mm.eg.db",
+        "limma",
+        "GEOquery",
+        "msigdbr",
+        "aggregation",
+        "Seurat"
+      ],
+      "Enhances": [
+        null
+      ],
+      "License": "MIT + file LICENCE",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
+      "NeedsCompilation": "yes",
+      "Repository": "BioCsoft",
+      "Type": "source"
     },
     "fitdistrplus": {
       "Package": "fitdistrplus",
@@ -3064,6 +3115,45 @@
       "Maintainer": "Joe Cheng <joe@posit.co>",
       "Repository": "CRAN"
     },
+    "msigdbr": {
+      "Package": "msigdbr",
+      "Version": "26.1.1",
+      "Source": "Repository",
+      "Priority": null,
+      "Depends": [
+        "R (>= 4.1)"
+      ],
+      "Imports": [
+        "assertthat",
+        "babelgene (>= 22.9)",
+        "curl",
+        "dplyr (>= 1.1.1)",
+        "lifecycle",
+        "rlang",
+        "tibble",
+        "tidyselect (>= 1.2.0)",
+        "tools"
+      ],
+      "LinkingTo": [
+        null
+      ],
+      "Suggests": [
+        "knitr",
+        "rmarkdown",
+        "roxygen2",
+        "testthat"
+      ],
+      "Enhances": [
+        null
+      ],
+      "License": "MIT + file LICENSE",
+      "License_is_FOSS": null,
+      "License_restricts_use": null,
+      "OS_type": null,
+      "NeedsCompilation": "no",
+      "Repository": "CRAN",
+      "Type": "source"
+    },
     "nlme": {
       "Package": "nlme",
       "Version": "3.1-170",
@@ -3681,7 +3771,7 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "1.2.3",
+      "Version": "1.2.4",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Project Environments",
@@ -3723,12 +3813,12 @@
         "webfakes"
       ],
       "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.3",
       "VignetteBuilder": "knitr",
       "Config/Needs/website": "tidyverse/tidytemplate",
       "Config/testthat/edition": "3",
       "Config/testthat/parallel": "true",
       "Config/testthat/start-first": "bioconductor,python,install,restore,snapshot,retrieve,remotes",
+      "Config/roxygen2/version": "8.0.0",
       "NeedsCompilation": "no",
       "Author": "Kevin Ushey [aut, cre] (ORCID: <https://orcid.org/0000-0003-2880-7407>), Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Posit Software, PBC [cph, fnd]",
       "Maintainer": "Kevin Ushey <kevin@rstudio.com>",
@@ -4365,9 +4455,9 @@
     },
     "spatstat.explore": {
       "Package": "spatstat.explore",
-      "Version": "3.8-1",
+      "Version": "3.8-2",
       "Source": "Repository",
-      "Date": "2026-05-24",
+      "Date": "2026-07-27",
       "Title": "Exploratory Data Analysis for the 'spatstat' Family",
       "Authors@R": "c(person(\"Adrian\", \"Baddeley\",  role = c(\"aut\", \"cre\", \"cph\"), email = \"Adrian.Baddeley@curtin.edu.au\", comment = c(ORCID=\"0000-0001-9499-8382\")), person(\"Rolf\", \"Turner\",  role = c(\"aut\", \"cph\"), email=\"rolfturner@posteo.net\", comment=c(ORCID=\"0000-0001-5521-5218\")), person(\"Ege\",   \"Rubak\",  role = c(\"aut\", \"cph\"), email = \"rubak@math.aau.dk\", comment=c(ORCID=\"0000-0002-6675-533X\")), person(\"Kasper\", \"Klitgaard Berthelsen\", role = \"ctb\"), person(\"Warick\", \"Brown\", role = \"cph\"), person(\"Achmad\", \"Choiruddin\", role = \"ctb\"), person(\"Ya-Mei\", \"Chang\", role = \"ctb\"), person(\"Jean-Francois\", \"Coeurjolly\", role = \"ctb\"), person(\"Lucia\", \"Cobo Sanchez\", role = c(\"ctb\", \"cph\")), person(\"Ottmar\", \"Cronie\", role = \"ctb\"), person(\"Tilman\", \"Davies\", role = c(\"ctb\", \"cph\")), person(\"Julian\", \"Gilbey\", role = \"ctb\"), person(\"Jonatan\", \"Gonzalez\", role = \"ctb\"), person(\"Yongtao\", \"Guan\", role = \"ctb\"), person(\"Ute\", \"Hahn\", role = \"ctb\"), person(\"Martin\", \"Hazelton\",  role = \"ctb\"), person(\"Kassel\", \"Hingee\", role = c(\"ctb\", \"cph\")), person(\"Abdollah\", \"Jalilian\",  role = \"ctb\"), person(\"Frederic\", \"Lavancier\", role = \"ctb\"), person(\"Marie-Colette\", \"van Lieshout\", role = c(\"ctb\", \"cph\")), person(\"Greg\", \"McSwiggan\", role = \"ctb\"), person(\"Robin K\", \"Milne\", role = \"cph\"), person(\"Tuomas\", \"Rajala\", role = \"ctb\"), person(\"Suman\", \"Rakshit\", role = c(\"ctb\", \"cph\")), person(\"Dominic\", \"Schuhmacher\", role = \"ctb\"), person(\"Rasmus\", \"Plenge Waagepetersen\", role = \"ctb\"), person(\"Hangsheng\", \"Wang\", role = \"ctb\"), person(\"Tingting\", \"Zhan\", role=\"ctb\"))",
       "Maintainer": "Adrian Baddeley <Adrian.Baddeley@curtin.edu.au>",
@@ -4385,7 +4475,7 @@
         "nlme"
       ],
       "Imports": [
-        "spatstat.utils (>= 3.2-3)",
+        "spatstat.utils (>= 3.2-4)",
         "spatstat.sparse (>= 3.2-0)",
         "goftest (>= 1.2-2)",
         "Matrix",
@@ -4453,9 +4543,9 @@
     },
     "spatstat.random": {
       "Package": "spatstat.random",
-      "Version": "3.5-0",
+      "Version": "3.5-1",
       "Source": "Repository",
-      "Date": "2026-05-24",
+      "Date": "2026-07-26",
       "Title": "Random Generation Functionality for the 'spatstat' Family",
       "Authors@R": "c(person(\"Adrian\", \"Baddeley\",  role = c(\"aut\", \"cre\", \"cph\"), email = \"Adrian.Baddeley@curtin.edu.au\", comment = c(ORCID=\"0000-0001-9499-8382\")), person(\"Rolf\", \"Turner\",  role = c(\"aut\", \"cph\"), email=\"rolfturner@posteo.net\", comment=c(ORCID=\"0000-0001-5521-5218\")), person(\"Ege\",   \"Rubak\",  role = c(\"aut\", \"cph\"), email = \"rubak@math.aau.dk\", comment=c(ORCID=\"0000-0002-6675-533X\")), person(\"Tilman\", \"Davies\", role = c(\"aut\", \"cph\"), comment=c(ORCID=\"0000-0003-0565-1825\")), person(\"Kasper\", \"Klitgaard Berthelsen\", role = c(\"ctb\", \"cph\")), person(\"David\", \"Bryant\", role = c(\"ctb\", \"cph\")), person(\"Ya-Mei\", \"Chang\", role = c(\"ctb\", \"cph\"), email = \"yamei628@gmail.com\"), person(\"Ute\", \"Hahn\", role = \"ctb\"), person(\"Abdollah\", \"Jalilian\",  role = \"ctb\"), person(\"Dominic\", \"Schuhmacher\", role = c(\"ctb\", \"cph\")), person(\"Rasmus\", \"Plenge Waagepetersen\", role = c(\"ctb\", \"cph\")))",
       "Maintainer": "Adrian Baddeley <Adrian.Baddeley@curtin.edu.au>",
@@ -4463,7 +4553,7 @@
         "R (>= 3.5.0)",
         "spatstat.data (>= 3.1-9)",
         "spatstat.univar (>= 3.2-0)",
-        "spatstat.geom (>= 3.8-1)",
+        "spatstat.geom (>= 3.8-2)",
         "stats",
         "utils",
         "methods",
@@ -4471,7 +4561,7 @@
       ],
       "Imports": [
         "Matrix",
-        "spatstat.utils (>= 3.2-3)",
+        "spatstat.utils (>= 3.2-4)",
         "spatstat.sparse (>= 3.2-0)"
       ],
       "Suggests": [
@@ -4575,9 +4665,9 @@
     },
     "stringi": {
       "Package": "stringi",
-      "Version": "1.8.7",
+      "Version": "1.8.9",
       "Source": "Repository",
-      "Date": "2025-03-27",
+      "Date": "2026-07-30",
       "Title": "Fast and Portable Character String Processing Facilities",
       "Description": "A collection of character string/text/natural language processing tools for pattern searching (e.g., with 'Java'-like regular expressions or the 'Unicode' collation algorithm), random string generation, case mapping, string transliteration, concatenation, sorting, padding, wrapping, Unicode normalisation, date-time formatting and parsing, and many more. They are fast, consistent, convenient, and - thanks to 'ICU' (International Components for Unicode) - portable across all locales and platforms. Documentation about 'stringi' is provided via its website at <https://stringi.gagolewski.com/> and the paper by Gagolewski (2022, <doi:10.18637/jss.v103.i02>).",
       "URL": "https://stringi.gagolewski.com/, https://github.com/gagolews/stringi, https://icu.unicode.org/",
@@ -4595,10 +4685,10 @@
       "Biarch": "TRUE",
       "License": "file LICENSE",
       "Authors@R": "c(person(given = \"Marek\", family = \"Gagolewski\", role = c(\"aut\", \"cre\", \"cph\"), email = \"marek@gagolewski.com\", comment = c(ORCID = \"0000-0003-0637-6028\")), person(given = \"Bartek\", family = \"Tartanus\", role = \"ctb\"), person(\"Unicode, Inc. and others\", role=\"ctb\", comment = \"ICU4C source code, Unicode Character Database\") )",
-      "RoxygenNote": "7.3.2",
       "Encoding": "UTF-8",
+      "Config/roxygen2/version": "8.0.0",
       "NeedsCompilation": "yes",
-      "Author": "Marek Gagolewski [aut, cre, cph] (<https://orcid.org/0000-0003-0637-6028>), Bartek Tartanus [ctb], Unicode, Inc. and others [ctb] (ICU4C source code, Unicode Character Database)",
+      "Author": "Marek Gagolewski [aut, cre, cph] (ORCID: <https://orcid.org/0000-0003-0637-6028>), Bartek Tartanus [ctb], Unicode, Inc. and others [ctb] (ICU4C source code, Unicode Character Database)",
       "Maintainer": "Marek Gagolewski <marek@gagolewski.com>",
       "License_is_FOSS": "yes",
       "Repository": "CRAN"
@@ -5198,12 +5288,12 @@
     },
     "zoo": {
       "Package": "zoo",
-      "Version": "1.8-15",
+      "Version": "1.9-0",
       "Source": "Repository",
-      "Date": "2025-12-15",
+      "Date": "2026-07-30",
       "Title": "S3 Infrastructure for Regular and Irregular Time Series (Z's Ordered Observations)",
       "Authors@R": "c(person(given = \"Achim\", family = \"Zeileis\", role = c(\"aut\", \"cre\"), email = \"Achim.Zeileis@R-project.org\", comment = c(ORCID = \"0000-0003-0918-3766\")), person(given = \"Gabor\", family = \"Grothendieck\", role = \"aut\", email = \"ggrothendieck@gmail.com\"), person(given = c(\"Jeffrey\", \"A.\"), family = \"Ryan\", role = \"aut\", email = \"jeff.a.ryan@gmail.com\"), person(given = c(\"Joshua\", \"M.\"), family = \"Ulrich\", role = \"ctb\", email = \"josh.m.ulrich@gmail.com\"), person(given = \"Felix\", family = \"Andrews\", role = \"ctb\", email = \"felix@nfrac.org\"))",
-      "Description": "An S3 class with methods for totally ordered indexed observations. It is particularly aimed at irregular time series of numeric vectors/matrices and factors. zoo's key design goals are independence of a particular index/date/time class and consistency with ts and base R by providing methods to extend standard generics.",
+      "Description": "An S3 class with methods for working with regular and irregular time series. The class stores data as numeric vectors/matrices (or factors) along with a time index of arbitrary class (including numeric, Date, POSIXct, chron, yearmon, yearqtr, etc.). Functions and methods are consistent with the ts class and base R and also extend standard generics. Tools include: Data import/export, coercion, visualization (with base R, 'ggplot2', 'lattice', 'tinyplot'), alignment and merging, aggregation, lags and subsets, rolling analytics, and time-based interpolation/filling. The design is introduced in Zeileis and Grothendieck (2005) <doi:10.18637/jss.v014.i06>.",
       "Depends": [
         "R (>= 3.1.0)",
         "stats"
@@ -5213,12 +5303,13 @@
         "coda",
         "chron",
         "ggplot2 (>= 3.5.0)",
+        "knitr",
         "mondate",
         "scales",
         "stinepack",
         "strucchange",
         "timeDate",
-        "timeSeries",
+        "timeSeries (>= 4021.104)",
         "tinyplot",
         "tis",
         "tseries",
@@ -5231,7 +5322,9 @@
         "lattice (>= 0.20-27)"
       ],
       "License": "GPL-2 | GPL-3",
-      "URL": "https://zoo.R-Forge.R-project.org/",
+      "VignetteBuilder": "knitr",
+      "URL": "https://zeileis.codeberg.page/zoo/",
+      "BugReports": "https://codeberg.org/zeileis/zoo/issues",
       "NeedsCompilation": "yes",
       "Author": "Achim Zeileis [aut, cre] (ORCID: <https://orcid.org/0000-0003-0918-3766>), Gabor Grothendieck [aut], Jeffrey A. Ryan [aut], Joshua M. Ulrich [ctb], Felix Andrews [ctb]",
       "Maintainer": "Achim Zeileis <Achim.Zeileis@R-project.org>",
