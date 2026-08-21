@@ -208,6 +208,202 @@ mean_expression_score <- function(mat, genes) {
 
 
 # ------------------------------------------------------------------------------
+# 5. Load FINAL Clean-B MΦ object
+# ------------------------------------------------------------------------------
+
+if (!file.exists(INPUT_RDS)) {
+    stop(
+        "FINAL RDS not found:\n",
+        INPUT_RDS
+    )
+}
+
+msg(
+    "Loading FINAL RDS: ",
+    INPUT_RDS
+)
+
+mphi <- readRDS(
+    INPUT_RDS
+)
+
+if (!inherits(
+    mphi,
+    "Seurat"
+)) {
+    stop(
+        "Input object is not a Seurat object."
+    )
+}
+
+if (!FINAL_CLASS_COL %in%
+    colnames(
+        mphi@meta.data
+    )) {
+
+    stop(
+        "FINAL annotation column missing: ",
+        FINAL_CLASS_COL
+    )
+}
+
+DefaultAssay(
+    mphi
+) <- ASSAY_USE
+
+
+# ------------------------------------------------------------------------------
+# 6. Resolve sample column and UMAP reduction
+# ------------------------------------------------------------------------------
+
+meta_cols <- colnames(
+    mphi@meta.data
+)
+
+SAMPLE_COL <- first_existing(
+    meta_cols,
+    c(
+        "sample_4group",
+        "sample",
+        "sample_id",
+        "orig.ident"
+    )
+)
+
+if (is.na(
+    SAMPLE_COL
+)) {
+    stop(
+        "Sample metadata column not found."
+    )
+}
+
+available_reductions <- Reductions(
+    mphi
+)
+
+REDUCTION_USE <- first_existing(
+    available_reductions,
+    c(
+        "umapRPCA",
+        "mphi.umap.rpca",
+        "rpca.umap",
+        "umap.rpca",
+        "umap"
+    )
+)
+
+if (is.na(
+    REDUCTION_USE
+)) {
+
+    umap_like <- available_reductions[
+        grepl(
+            "umap",
+            available_reductions,
+            ignore.case = TRUE
+        )
+    ]
+
+    if (length(
+        umap_like
+    ) == 0L) {
+        stop(
+            "No UMAP-like reduction found."
+        )
+    }
+
+    REDUCTION_USE <- umap_like[[1]]
+}
+
+msg(
+    "Sample column: ",
+    SAMPLE_COL
+)
+
+msg(
+    "UMAP reduction: ",
+    REDUCTION_USE
+)
+
+
+# ------------------------------------------------------------------------------
+# 7. FINAL metadata used by all figures
+# ------------------------------------------------------------------------------
+
+mphi$sample_FINAL_v4150 <- as.character(
+    mphi@meta.data[[SAMPLE_COL]]
+)
+
+mphi$condition_FINAL_v4150 <- canonical_condition(
+    mphi$sample_FINAL_v4150
+)
+
+mphi$class_FINAL_v4150 <- factor(
+    as.character(
+        mphi@meta.data[[FINAL_CLASS_COL]]
+    ),
+    levels = CLASS_ORDER
+)
+
+if (any(
+    is.na(
+        mphi$class_FINAL_v4150
+    )
+)) {
+    stop(
+        "NA generated while constructing FINAL macrophage class factor."
+    )
+}
+
+meta <- mphi@meta.data %>%
+    rownames_to_column(
+        "cell"
+    ) %>%
+    transmute(
+        cell = cell,
+        sample = sample_FINAL_v4150,
+        condition = as.character(
+            condition_FINAL_v4150
+        ),
+        macrophage_class = as.character(
+            class_FINAL_v4150
+        )
+    )
+
+
+# ------------------------------------------------------------------------------
+# 8. FINAL class-count audit
+# ------------------------------------------------------------------------------
+
+final_count_table <- meta %>%
+    count(
+        macrophage_class,
+        name = "n_cells"
+    ) %>%
+    mutate(
+        fraction =
+            n_cells /
+            sum(
+                n_cells
+            ),
+
+        percent =
+            100 *
+            fraction
+    )
+
+write.csv(
+    final_count_table,
+    file.path(
+        TAB_DIR,
+        "00_FINAL_Mphi_class_counts_v4.15.5.csv"
+    ),
+    row.names = FALSE
+)
+
+
+# ------------------------------------------------------------------------------
 # 11. UMAP display limits
 #
 # Fixed publication window.
