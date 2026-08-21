@@ -1,0 +1,163 @@
+Mouse MASH whole-cell reference dataset
+========================================
+
+REFERENCE STATUS
+----------------
+This file defines the frozen reference whole-cell RDS for the
+Mouse MASH whole-cell v5.x analysis series.
+
+Reference RDS:
+RDS3_with_visualization_metadata_v4.1.1.rds
+
+Absolute path:
+/Volumes/SSD990_uenoy/scRNA_MASLD_MASH_pseudobulk/Mouse_MASH_RDS/RDS3_annotation_visualization_v4.1.1/objects/RDS3_with_visualization_metadata_v4.1.1.rds
+
+File size:
+approximately 12 GB
+
+MD5:
+d79e79bc67d38197b430ba16e1baa466
+
+
+SEURAT OBJECT
+-------------
+Cells:
+104588
+
+Features:
+14734
+
+Assays:
+RNA
+integratedRPCA
+
+Reductions:
+pca
+umapRPCA
+
+Graphs:
+integratedRPCA_nn
+integratedRPCA_snn
+
+
+PREVIOUS WHOLE-CELL CLUSTERING
+------------------------------
+Graph:
+integratedRPCA_snn
+
+Previous resolution:
+0.8
+
+Metadata:
+integratedRPCA_snn_res.0.8
+seurat_clusters
+
+
+RPCA INTEGRATION PARAMETERS
+---------------------------
+Integration method:
+RPCA
+
+Normalization:
+LogNormalize
+
+Anchor features:
+approximately 3000
+
+Integration dimensions:
+1:30
+
+k.anchor:
+5
+
+PCA:
+50 PCs
+
+PCA seed:
+42
+
+
+NEIGHBOR GRAPH
+--------------
+Reduction:
+pca
+
+Dimensions:
+1:30
+
+k.param:
+20
+
+SNN graph:
+integratedRPCA_snn
+
+
+UMAP
+----
+Reduction name:
+umapRPCA
+
+Dimensions:
+1:30
+
+n.neighbors:
+30
+
+min.dist:
+0.3
+
+metric:
+cosine
+
+seed:
+42
+
+
+WHOLE-CELL v5.x ANALYSIS POLICY
+-------------------------------
+Do not repeat RPCA integration initially.
+
+Use the existing:
+integratedRPCA_snn
+
+for whole-cell resolution auditing.
+
+Primary resolutions to evaluate:
+1.5
+2.0
+2.5
+3.0
+
+The previous resolution 0.8 clustering is retained as the
+reference whole-cell annotation.
+
+
+PRIMARY BIOLOGICAL TARGETS
+--------------------------
+Hepatocyte
+HSC / Mesenchymal
+LSEC / Endothelial
+
+These populations will subsequently be evaluated for
+macrophage interactions and lineage-specific remodeling.
+
+
+MACROPHAGE ANALYSIS
+-------------------
+The established macrophage Clean-B analysis is retained
+independently as the macrophage reference analysis.
+
+Current reproducible macrophage pipeline:
+through v4.16.5
+
+Git tag:
+mphi-cleanB-master-v4.16.5
+
+
+STORAGE POLICY
+--------------
+RDS files and analysis outputs:
+External SSD
+
+Scripts, configs, reproducibility metadata and Git history:
+/Users/uenoya/Projects/uenoyscRNA
